@@ -2,14 +2,15 @@ import React from "react";
 import CalDisplay from "../components/CalDisplay";
 import Link from "next/link";
 
-function Home() {
+const Cal = () => {
   return (
     <>
-      <Link href={"/cal"}>
-        <a>Go Calculator</a>
+      <Link href={"/home"}>
+        <a>back</a>
       </Link>
+      <CalDisplay />
     </>
   );
-}
+};
 
-export default Home;
+export default Cal;

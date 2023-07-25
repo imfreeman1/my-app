@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../Button";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import calAtom from "../../recoil/calculator";
+import CalController from "../CalController";
 
 const CalDisplay = () => {
-  const [count, setCount] = useState(0);
-  const increaseNum = () => {
-    setCount(count + 1);
-  };
-
-  const decreaseNum = () => {
-    setCount(count - 1);
-  };
+  const count = useRecoilValue(calAtom);
 
   return (
-    <section className="flex flex-col justify-center">
-      <div className="flex justify-center">
-        <span>{count}</span>
-      </div>
-      <div className="flex justify-around">
-        <Button children={"+"} onClick={increaseNum} className={""} />
-        <Button children={"-"} onClick={decreaseNum} className={""} />
+    <section className="flex justify-center">
+      <div className="flex flex-col justify-center w-56">
+        <div className="flex justify-end px-3 h-8 bg-white mb-1 rounded-t">
+          <span className="text-black text-lg">{count}</span>
+        </div>
+        <CalController />
       </div>
     </section>
   );

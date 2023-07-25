@@ -1,6 +1,12 @@
 import React from "react";
 
-const Button = ({ className, onClick, children }) => {
+interface Btn {
+  className: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  children: React.ReactNode | string;
+}
+
+const Button = ({ className, onClick, children }: Btn) => {
   return (
     <button className={className} onClick={onClick}>
       {children}
