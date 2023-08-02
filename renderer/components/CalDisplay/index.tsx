@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import calAtom from "../../recoil/calculator";
 import CalController from "../CalController";
 

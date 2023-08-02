@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../Button";
 import GrayOptBtn from "../GrayOptBtn";
 import NumBtn from "../NumBtn";
 import OrangeOptBtn from "../OrangeOptBtn";

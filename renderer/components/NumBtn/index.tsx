@@ -8,17 +8,19 @@ const NumBtn = () => {
   const count = useRecoilValue(calAtom);
   const setCount = useSetRecoilState(calAtom);
   const onClick = (num) => {
-    setCount(count + num);
+    if (count === "0" && num !== ".") {
+      setCount(num);
+    } else {
+      setCount(count + num);
+    }
   };
   return (
     <ul className="grid grid-cols-3 grid-rows-4 gap-1">
       {btnList.map((btn) => (
         <li className={`${btn === "0" ? "col-span-2" : ""}`} key={btn}>
-          <Button
-            className="btn-darkGray"
-            onClick={() => onClick(btn)}
-            children={btn}
-          />
+          <Button className="btn-darkGray" onClick={() => onClick(btn)}>
+            {btn}
+          </Button>
         </li>
       ))}
     </ul>
