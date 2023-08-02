@@ -1,9 +1,12 @@
 import { atom } from "recoil";
-import { InitState } from "./type";
+import { InitCalStringState, InitCalValueState } from "./type";
 
-const calAtom = atom<InitState>({
+export const calAtom = atom<InitCalValueState>({
   key: "calAtom",
   default: "0",
 });
 
-export default calAtom;
+export const calStringAtom = atom<InitCalStringState>({
+  key: "calStringAtom",
+  default: "",
+});

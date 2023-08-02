@@ -1,3 +1,3 @@
-import calAtom from "./atom";
+import { calAtom, calStringAtom } from "./atom";
 
-export default calAtom;
+export { calAtom, calStringAtom };

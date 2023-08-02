@@ -1,1 +1,3 @@
-export type InitState = string;
+export type InitCalValueState = string;
+
+export type InitCalStringState = string;

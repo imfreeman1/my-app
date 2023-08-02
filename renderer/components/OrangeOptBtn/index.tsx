@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import Button from "../Button";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import calAtom from "../../recoil/calculator";
+import { calAtom, calStringAtom } from "../../recoil/calculator";
+import { orangeBtnObj } from "../../constants/btnConstants";
 
 interface CalRefType {
   waitNum: null | string;
@@ -19,31 +20,24 @@ const OrangeOptBtn = () => {
   const btnList = ["/", "*", "-", "+"];
   const count = useRecoilValue(calAtom);
   const setCount = useSetRecoilState(calAtom);
+  const countString = useRecoilValue(calStringAtom);
+  const setCountString = useSetRecoilState(calStringAtom);
   const waitCalculation = useRef<CalRefType>(initRef);
+
   const onClick = (operation: string) => {
+    const lastLetter = countString[countString.length - 1];
     if (!waitCalculation.current.waitNum) {
+      setCountString(count);
       waitCalculation.current.waitNum = count;
     }
     waitCalculation.current.operation = operation;
+    if (Number.isNaN(+lastLetter)) {
+      setCountString(countString.slice(0, -1) + operation);
+    } else {
+      setCountString(countString + operation);
+    }
+
     setCount("0");
-  };
-  const orangeBtnObj = {
-    "/": () => {
-      const tmp = +waitCalculation.current.waitNum / +count;
-      setCount(`${tmp}`);
-    },
-    "*": () => {
-      const tmp = +waitCalculation.current.waitNum * +count;
-      setCount(`${tmp}`);
-    },
-    "-": () => {
-      const tmp = +waitCalculation.current.waitNum - +count;
-      setCount(`${tmp}`);
-    },
-    "+": () => {
-      const tmp = +waitCalculation.current.waitNum + +count;
-      setCount(`${tmp}`);
-    },
   };
 
   const calculationOnClick = () => {
@@ -54,10 +48,14 @@ const OrangeOptBtn = () => {
       return;
     }
 
-    orangeBtnObj[waitCalculation.current.operation]();
+    orangeBtnObj[waitCalculation.current.operation](
+      waitCalculation.current.waitNum,
+      count,
+      setCount
+    );
     waitCalculation.current.waitNum = null;
     waitCalculation.current.operation = null;
-    console.log(waitCalculation.current);
+    setCountString("");
   };
   return (
     <ul className="flex flex-col gap-1">

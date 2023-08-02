@@ -1,16 +1,18 @@
 import React from "react";
 import Button from "../Button";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import calAtom from "../../recoil/calculator";
+import { calAtom, calStringAtom } from "../../recoil/calculator";
 
 // 나중엔 배열 풀자.
 
 const GrayOptBtn = () => {
   const count = useRecoilValue(calAtom);
   const setCount = useSetRecoilState(calAtom);
+  const setCountString = useSetRecoilState(calStringAtom);
   const GrayBtnObj = {
     AC: () => {
       setCount("0");
+      setCountString("");
     },
     "+/-": () => {
       setCount(`${-count}`);

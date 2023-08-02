@@ -4,12 +4,18 @@ import Link from "next/link";
 
 const Cal = () => {
   return (
-    <>
-      <Link href={"/home"}>
-        <a>back</a>
-      </Link>
+    <div>
+      <div className="h-16 flex items-center">
+        <ul>
+          <li>
+            <Link href={"/home"}>
+              <a className="w-16 bg-slate-500 border p-2">back</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
       <CalDisplay />
-    </>
+    </div>
   );
 };
 
