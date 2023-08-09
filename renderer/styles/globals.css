@@ -4,11 +4,14 @@
 
 @layer base {
   body {
-    @apply bg-black text-white;
+    @apply bg-bgBlack text-white;
   }
 }
 
 @layer components {
+  .nav-btn {
+    @apply text-black hover:text-lg duration-1000 w-fit;
+  }
   .btn-blue {
     @apply text-white font-bold px-4 py-2 rounded bg-blue-600 hover:bg-blue-500;
   }

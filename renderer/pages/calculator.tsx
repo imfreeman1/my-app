@@ -2,7 +2,7 @@ import React from "react";
 import CalDisplay from "../components/CalDisplay";
 import Link from "next/link";
 
-const Cal = () => {
+const Calculator = () => {
   return (
     <div>
       <div className="h-16 flex items-center">
@@ -19,4 +19,4 @@ const Cal = () => {
   );
 };
 
-export default Cal;
+export default Calculator;

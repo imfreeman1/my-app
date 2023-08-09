@@ -9,11 +9,20 @@ module.exports = {
     extend: {
       colors: {
         // use colors only specified
+        bgBlack: "#252c41",
+        baseGray: "#dddfe6",
+        warningRed: "#f1404b",
+        baseWhite: "#f4f5f9",
+
         white: colors.white,
         gray: colors.gray,
         blue: colors.blue,
         darkOrange: "#FF8C00",
         orange: "#FFA500",
+      },
+      gridTemplateRows: {
+        // Simple 8 row grid
+        8: "repeat(8, minmax(0, 1fr))",
       },
     },
   },
