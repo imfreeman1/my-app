@@ -8,7 +8,7 @@ function Home() {
   const testNav = [
     "Calculator",
     "TodoList",
-    "33333333333",
+    "Test",
     "44444444",
     "66666665",
     "67777777777",
