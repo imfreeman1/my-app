@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Card from "../components/Card";
+import TodoWrapper from "../components/TodoWrapper";
 
 const TodoList = () => {
   return (
@@ -11,9 +12,7 @@ const TodoList = () => {
       <Link href={"/home"}>
         <a>back</a>
       </Link>
-      <section className="col-start-2 col-end-12 row-start-2 row-end-8 h-auto flex">
-        <Card />
-      </section>
+      <TodoWrapper />
     </div>
   );
 };

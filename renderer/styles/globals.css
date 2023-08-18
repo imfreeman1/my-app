@@ -6,6 +6,9 @@
   body {
     @apply bg-bgBlack text-white;
   }
+  body button {
+    background-color: none;
+  }
 }
 
 @layer components {
@@ -23,5 +26,8 @@
   }
   .btn-orange {
     @apply text-white font-bold px-4 py-2 rounded bg-darkOrange hover:bg-orange w-full;
+  }
+  .default-card{
+    @apply flex flex-col items-center bg-baseGray rounded-md p-3
   }
 }

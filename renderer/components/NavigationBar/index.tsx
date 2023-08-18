@@ -6,8 +6,8 @@ const NavigationBar = ({ navList }) => {
   return (
     <div>
       <ul className="flex flex-col gap-1 h-16 w-fit">
-        {navList.map((nav) => {
-          return <NavItem content={nav} />;
+        {navList.map((nav, idx) => {
+          return <NavItem key={idx} content={nav} />;
         })}
       </ul>
     </div>

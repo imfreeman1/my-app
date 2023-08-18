@@ -4,4 +4,5 @@ export interface InputType {
   placeholder?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
+  checked?: boolean;
 }
