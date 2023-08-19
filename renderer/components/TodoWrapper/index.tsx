@@ -12,12 +12,12 @@ const TodoWrapper = () => {
       childTag: <AntForm />,
     },
     {
-      className: "default-card h-full",
+      className: "default-card h-full w-72",
       title: "진행 중",
       childTag: <TodoContainer completed={false} />,
     },
     {
-      className: "default-card h-full",
+      className: "default-card h-full w-72",
       title: "완료",
       childTag: <TodoContainer completed={true} />,
     },
