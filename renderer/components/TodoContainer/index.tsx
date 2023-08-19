@@ -10,7 +10,6 @@ const TodoContainer = ({ completed }) => {
     ? useRecoilValue(completedSelector)
     : useRecoilValue(unfinishedSelector);
 
-  console.log(todoList);
   return (
     <ul className="overflow-auto">
       {todoList?.map((todo, idx) => {
