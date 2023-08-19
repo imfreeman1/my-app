@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
 import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../recoil/todo";
 import { defaultTodoType } from "../../recoil/todo/type";
 import { v4 as uuidv4 } from "uuid";
+
 const { TextArea } = Input;
 
 const AntForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const todoList = useRecoilValue(todoListAtom);
-  const setTodo = useSetRecoilState(todoListAtom);
+  const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const inputChange = ({ target }) => {
     setTitle(target.value);
   };
@@ -28,10 +28,9 @@ const AntForm = () => {
     };
     setTitle("");
     setContent("");
-    setTodo([...todoList, todo]);
+    setTodoList([...todoList, todo]);
   };
   const cancelHandler = () => {
-    console.log("test", title.length, content.length);
     setTitle("");
     setContent("");
   };

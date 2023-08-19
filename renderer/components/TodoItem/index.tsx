@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../recoil/todo";
+import { defaultTodoType } from "../../recoil/todo/type";
 
 const TodoItem = ({ todo }) => {
-  const [checked, setChecked] = useState(false);
-  const checkBoxHandler = () => {
-    setChecked(!checked);
-  };
-  const todoList = useRecoilValue(todoListAtom);
-  const setTodoList = useSetRecoilState(todoListAtom);
+  const [todoList, setTodoList] = useRecoilState(todoListAtom);
 
-  useEffect(() => {
-    setTodoList(
-      todoList.map((val) => {
-        if (val.id === todo.id) {
-          val.isCompleted = checked;
-          return val;
-        }
+  const checkBoxHandler = () => {
+    let newList: defaultTodoType[] = structuredClone(todoList);
+    newList = newList.map((val) => {
+      if (val.id === todo.id) {
+        val.isCompleted = !val.isCompleted;
         return val;
-      })
-    );
-  }, [checked]);
+      }
+      return val;
+    });
+    setTodoList(newList);
+  };
 
   return (
     <li className="m-2">
@@ -30,7 +26,7 @@ const TodoItem = ({ todo }) => {
         <Input
           type="checkbox"
           className="w-8 h-5"
-          checked={checked}
+          checked={todo.isCompleted}
           onChange={checkBoxHandler}
         />
         <div className="grow flex flex-col h-full gap-1">

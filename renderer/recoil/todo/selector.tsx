@@ -6,7 +6,6 @@ const completedSelector = selector({
   get: ({ get }) => {
     let filterList = get(todoListAtom);
     filterList = filterList.filter(({ isCompleted }) => isCompleted === true);
-    console.log("com", filterList);
     return filterList;
   },
 });
@@ -16,7 +15,6 @@ const unfinishedSelector = selector({
   get: ({ get }) => {
     let filterList = get(todoListAtom);
     filterList = filterList.filter(({ isCompleted }) => isCompleted === false);
-    console.log("unf", filterList);
     return filterList;
   },
 });
