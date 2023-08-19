@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="kr">
       <meta
         name="viewport"
-        content="width=device-width; initial-scale=0.7; maximum-scale=0.7; user-scalable=no;"
+        content="width=device-width, initial-scale=0.7, maximum-scale=0.7, user-scalable=no"
       />
       <Head>
         <meta
