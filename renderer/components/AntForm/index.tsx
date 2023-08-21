@@ -54,7 +54,7 @@ const AntForm = () => {
             value={content}
           />
         </Form.Item>
-        <div className="flex justify-around">
+        <div className="flex justify-evenly">
           <Button
             className="btn-blue"
             type="submit"
@@ -64,7 +64,7 @@ const AntForm = () => {
             {"완료"}
           </Button>
           <Button
-            className="nav-btn"
+            className="btn-white"
             type="button"
             onClick={cancelHandler}
             disabled={title.length || content.length ? false : true}
