@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Card from "../components/Card";
 import TodoWrapper from "../components/TodoWrapper";
 
 const TodoList = () => {
