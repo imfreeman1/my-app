@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.App {
+  font-family: 'Gothic A1', sans-serif;
+}
+
 @layer base {
   body {
     @apply bg-bgBlack text-white;
-  }
-  body button {
-    background-color: none;
   }
 }
 
