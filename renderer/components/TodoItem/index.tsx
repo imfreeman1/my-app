@@ -1,14 +1,23 @@
-import React from "react";
-import Input from "../Input";
+import React, { useState } from "react";
+import { Input } from "antd";
 import Button from "../Button";
 import { useRecoilState } from "recoil";
 import { todoListAtom } from "../../recoil/todo";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-
+import {
+  AiFillEdit,
+  AiFillDelete,
+  AiOutlineCheck,
+  AiOutlineClose,
+} from "react-icons/ai";
 import { defaultTodoType } from "../../recoil/todo/type";
+
+const { TextArea } = Input;
 
 const TodoItem = ({ todo }) => {
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
+  const [modify, setModify] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(todo.title);
+  const [textAreaValue, setTextAreaValue] = useState<string>(todo.content);
 
   const checkBoxHandler = () => {
     let newList: defaultTodoType[] = structuredClone(todoList);
@@ -22,8 +31,32 @@ const TodoItem = ({ todo }) => {
     setTodoList(newList);
   };
 
+  const onChange = ({ target }, callBack: React.Dispatch<string>) => {
+    callBack(target.value);
+  };
+
   const modifyHandler = () => {
-    let modifyList: defaultTodoType[] = structuredClone(todoList);
+    setModify(!modify);
+  };
+
+  const cancelHandler = () => {
+    setInputValue(todo.title);
+    setTextAreaValue(todo.content);
+    setModify(false);
+  };
+
+  const submitHandler = () => {
+    let newList = structuredClone(todoList);
+    newList = newList.map((val) => {
+      if (val.id === todo.id) {
+        val.title = inputValue;
+        val.content = textAreaValue;
+        return val;
+      }
+      return val;
+    });
+    setTodoList(newList);
+    setModify(false);
   };
 
   const deleteHandler = (todoId) => {
@@ -42,19 +75,72 @@ const TodoItem = ({ todo }) => {
           checked={todo.isCompleted}
           onChange={checkBoxHandler}
         />
-        <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
-          <span className="font-semibold border-b-2">{todo.title}</span>
-          <span className="h-auto w-full  whitespace-pre-line inline-block">
-            {todo.content}
-          </span>
-        </div>
-
-        <Button className="h-fit p-1" onClick={modifyHandler}>
-          {<AiFillEdit size={24} />}
-        </Button>
-        <Button className="h-fit p-1" onClick={() => deleteHandler(todo.id)}>
-          {<AiFillDelete size={24} />}
-        </Button>
+        {!modify ? (
+          <>
+            <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
+              <span className="font-semibold border-b-2">{todo.title}</span>
+              <span className="h-auto w-full  whitespace-pre-line inline-block">
+                {todo.content}
+              </span>
+            </div>
+            <div className="h-full">
+              <Button
+                type="button"
+                className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
+                onClick={modifyHandler}
+              >
+                {<AiFillEdit size={24} />}
+              </Button>
+            </div>
+            <div className="h-full">
+              <Button
+                type="button"
+                className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
+                onClick={() => deleteHandler(todo.id)}
+              >
+                {<AiFillDelete size={24} />}
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
+              <Input
+                type="text"
+                value={inputValue}
+                onChange={(e) => onChange(e, setInputValue)}
+              />
+              <TextArea
+                rows={4}
+                value={textAreaValue}
+                onChange={(e) => onChange(e, setTextAreaValue)}
+              />
+            </div>
+            <div className="h-full">
+              <Button
+                type="button"
+                className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
+                onClick={submitHandler}
+                disabled={
+                  inputValue === todo.title && textAreaValue === todo.content
+                    ? true
+                    : false
+                }
+              >
+                {<AiOutlineCheck size={24} color=" green" />}
+              </Button>
+            </div>
+            <div className="h-full">
+              <Button
+                type="button"
+                className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
+                onClick={cancelHandler}
+              >
+                {<AiOutlineClose size={24} color="red" />}
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </li>
   );
