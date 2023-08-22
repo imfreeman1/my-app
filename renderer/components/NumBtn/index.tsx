@@ -1,15 +1,13 @@
 import React from "react";
 import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import { BTN_LIST } from "../../constants/btnConstants/btnConstants";
 import { STRING_CONSTANT } from "../../constants/basicConstants/basicConstants";
 
 const NumBtn = () => {
-  const count = useRecoilValue(calAtom);
-  const setCount = useSetRecoilState(calAtom);
-  const countString = useRecoilValue(calStringAtom);
-  const setCountString = useSetRecoilState(calStringAtom);
+  const [count, setCount] = useRecoilState(calAtom);
+  const [countString, setCountString] = useRecoilState(calStringAtom);
   const onClick = (inputNum: string) => {
     if (count === STRING_CONSTANT.zero && inputNum !== STRING_CONSTANT.dot) {
       setCount(inputNum);
@@ -30,7 +28,11 @@ const NumBtn = () => {
     <ul className="grid grid-cols-3 grid-rows-4 gap-1">
       {BTN_LIST.num.map((btn) => (
         <li className={`${btn === "0" ? "col-span-2" : ""}`} key={btn}>
-          <Button className="btn-darkGray" onClick={() => onClick(btn)}>
+          <Button
+            type="button"
+            className="btn-darkGray"
+            onClick={() => onClick(btn)}
+          >
             {btn}
           </Button>
         </li>

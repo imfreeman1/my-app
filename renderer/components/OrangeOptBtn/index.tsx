@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import {
   BTN_LIST,
@@ -20,10 +20,8 @@ const initRef: CalRefType = {
 };
 
 const OrangeOptBtn = () => {
-  const count = useRecoilValue(calAtom);
-  const setCount = useSetRecoilState(calAtom);
-  const countString = useRecoilValue(calStringAtom);
-  const setCountString = useSetRecoilState(calStringAtom);
+  const [count, setCount] = useRecoilState(calAtom);
+  const [countString, setCountString] = useRecoilState(calStringAtom);
   const waitCalculation = useRef<CalRefType>(initRef);
 
   const onClick = (operation: string) => {
@@ -59,13 +57,21 @@ const OrangeOptBtn = () => {
     <ul className="flex flex-col gap-1">
       {BTN_LIST.orange.map((btn) => (
         <li key={btn}>
-          <Button className="btn-orange" onClick={() => onClick(btn)}>
+          <Button
+            type="button"
+            className="btn-orange"
+            onClick={() => onClick(btn)}
+          >
             {btn}
           </Button>
         </li>
       ))}
       <li>
-        <Button className="btn-orange" onClick={calculationOnClick}>
+        <Button
+          type="button"
+          className="btn-orange"
+          onClick={calculationOnClick}
+        >
           {STRING_CONSTANT.equal}
         </Button>
       </li>

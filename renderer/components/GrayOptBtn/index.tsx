@@ -1,14 +1,14 @@
 import React from "react";
 import Button from "../Button";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import { GRAY_BTN_METHOD } from "../../constants/btnConstants/btnConstants";
 
 // 나중엔 배열 풀자.
 
 const GrayOptBtn = () => {
-  const count = useRecoilValue(calAtom);
-  const setCount = useSetRecoilState(calAtom);
+  const [count, setCount] = useRecoilState(calAtom);
+
   const setCountString = useSetRecoilState(calStringAtom);
 
   return (
@@ -18,6 +18,7 @@ const GrayOptBtn = () => {
         return (
           <li key={idx}>
             <Button
+              type="button"
               className="btn-gray"
               onClick={() => method(setCount, setCountString, count)}
             >
