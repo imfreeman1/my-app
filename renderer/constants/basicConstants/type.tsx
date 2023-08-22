@@ -5,3 +5,7 @@ export interface IStringType {
 export interface INumberType {
   [name: string]: number;
 }
+
+export interface INavigateType<T> {
+  list: Array<T>;
+}
