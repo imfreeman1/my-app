@@ -2,19 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .App {
-  font-family: 'Gothic A1', sans-serif;
+  @apply font-mono
 }
 
 @layer base {
   body {
-    @apply bg-bgBlack text-white;
+    @apply bg-black text-white;
   }
 }
 
 @layer components {
+  .nav-btn-white {
+    @apply hover:text-lg duration-1000 w-fit;
+  }
   .nav-btn {
     @apply text-black hover:text-lg duration-1000 w-fit;
   }
