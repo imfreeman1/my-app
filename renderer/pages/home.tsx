@@ -6,7 +6,7 @@ import { NAVIGATOR_CONSTANT } from "../constants/basicConstants/basicConstants";
 
 function Home() {
   return (
-    <section className=" h-screen my-16 mx-12 bg-baseWhite">
+    <section className=" h-screen my-16 mx-1">
       <NavigationBar navList={NAVIGATOR_CONSTANT.list} />
     </section>
   );

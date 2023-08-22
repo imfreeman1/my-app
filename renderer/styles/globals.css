@@ -9,7 +9,7 @@
 
 @layer base {
   body {
-    @apply bg-black text-white;
+    @apply bg-imgBlack text-white bg-cover;
   }
 }
 
@@ -36,6 +36,6 @@
     @apply text-white font-bold px-4 py-2 rounded bg-darkOrange hover:bg-orange w-full duration-300;
   }
   .default-card{
-    @apply flex flex-col items-center bg-baseGray rounded-md p-3
+    @apply flex flex-col items-center rounded-md p-3
   }
 }

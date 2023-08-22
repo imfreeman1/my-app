@@ -24,6 +24,12 @@ module.exports = {
         // Simple 8 row grid
         8: "repeat(8, minmax(0, 1fr))",
       },
+      backgroundImage: {
+        rain: "url('/img/rain-1920.jpg')",
+        church: "url('/img/church-1280.jpg')",
+        imgBlack: "url('/img/black-1280.jpg')",
+        bricks: "url('/img/brick2-640.jpg')",
+      },
     },
   },
   plugins: [],
