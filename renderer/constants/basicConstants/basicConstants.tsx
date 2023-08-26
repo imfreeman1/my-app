@@ -12,5 +12,5 @@ export const NUMBER_CONSTANT: INumberType = {
 };
 
 export const NAVIGATOR_CONSTANT: INavigateType<string> = {
-  list: ["Home", "Calculator", "TodoList", "Test"],
+  list: ["Home", "Calculator", "TodoList", "Test", "Board"],
 };
