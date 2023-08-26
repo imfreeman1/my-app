@@ -11,7 +11,7 @@ const CalDisplay = () => {
       <div className="flex flex-col justify-end px-3 h-16 bg-gray-200 pt-4 pb-1 mb-1 rounded-t">
         {countString && (
           <div className="flex w-full justify-end pr-1">
-            <span className=" text-gray-300">{countString}</span>
+            <span className=" text-gray-400">{countString}</span>
           </div>
         )}
         <div className="flex w-full justify-end">
