@@ -15,13 +15,13 @@ const TodoWrapper = () => {
     {
       className: "default-card h-full w-72 bg-bricks",
       title: "진행 중",
-      titleClass: "text-white text-2xl",
+      titleClass: "text-white text-2xl bg-gray-400 py-1 px-3 rounded-md",
       childTag: <TodoContainer completed={false} />,
     },
     {
       className: "default-card h-full w-72 bg-bricks",
       title: "완료",
-      titleClass: "text-white text-2xl",
+      titleClass: "text-white text-2xl bg-blue-600 py-1 px-3 rounded-md",
       childTag: <TodoContainer completed={true} />,
     },
   ];
