@@ -29,7 +29,14 @@
     title : string,
     content : string,
     time: number | string,
+    count: number
   }
 ```
 
 이미지를 사용할지에 대해서는 더 고려해볼 필요가 있을 듯.
+
+### 현재 수정 예정 및 의문사항
+
+- recoilState가 read only인데 이걸 굳이 class문법을 사용하여 한번더 캡슐화 할 필요가 있을까? 차라리 atomFamily를 통해 관리해보는 건 어떨지?
+- sideBar에 들어가야할 내용 정하기
+-
