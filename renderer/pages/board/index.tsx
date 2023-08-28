@@ -1,7 +1,7 @@
 import React from "react";
 import BoardWrapper from "../../components/BoardWrapper";
 
-const board = () => {
+const Board = () => {
   return (
     <>
       <BoardWrapper />
@@ -9,4 +9,4 @@ const board = () => {
   );
 };
 
-export default board;
+export default Board;
