@@ -1,7 +1,7 @@
 import { DetailedHTMLProps } from "react";
 
 export interface IButton {
-  className: string;
+  className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode | string;
   type: "button" | "submit" | "reset";
