@@ -75,3 +75,7 @@ pnpm run dev
   navigate 기능에 대해 찾아봐야할 필요가 있음.
 
 - 현재 사용하는 id의 queryString이 너무 길다는 느낌이 있음.
+
+### Todo (8/28 Start)
+
+- husky를 사용해서 git hook을 사용해보자.
