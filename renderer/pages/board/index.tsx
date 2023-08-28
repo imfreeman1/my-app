@@ -1,6 +1,5 @@
-import Link from "next/link";
 import React from "react";
-import BoardWrapper from "../components/BoardWrapper";
+import BoardWrapper from "../../components/BoardWrapper";
 
 const board = () => {
   return (
