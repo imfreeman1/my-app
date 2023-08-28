@@ -1,8 +1,7 @@
 import React from "react";
 import TodoItem from "../TodoItem";
 import { useRecoilValue } from "recoil";
-import { completedSelector, todoListAtom } from "../../recoil/todo";
-import { unfinishedSelector } from "../../recoil/todo/selector";
+import { completedSelector, unfinishedSelector } from "../../recoil/todo";
 
 const TodoContainer = ({ completed }) => {
   // 여기서 rocoil store를 통해 todolist를 가져오자.
