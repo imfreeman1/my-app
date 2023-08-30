@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { boardListAtom } from "../../recoil/board";
 import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
+import makeDateString from "../../utils/dateUtils";
 
 const Write = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const Write = () => {
       id: uuidv4(),
       title,
       content,
-      time: "111111",
+      time: makeDateString(),
       count: 0,
     };
     setBoardList([test, ...boardList]);
@@ -44,16 +45,13 @@ const Write = () => {
                 onChange={(e) => onChange(e, setTitle)}
               />
             </label>
-            <label>
-              <span>내용</span>
-              <textarea
-                onChange={(e) => onChange(e, setContent)}
-                value={content}
-                className="resize-none mt-3 overflow-auto border-2 border-gray-300 rounded-md py-2 px-3"
-                rows={16}
-                cols={60}
-              />
-            </label>
+            <textarea
+              onChange={(e) => onChange(e, setContent)}
+              value={content}
+              className="resize-none mt-3 overflow-auto border-2 border-gray-300 rounded-md py-2 px-3"
+              rows={12}
+              cols={60}
+            />
           </form>
           <div className="flex justify-evenly w-full mt-2">
             <Button onClick={onSubmit} type="button" className="btn-blue">
