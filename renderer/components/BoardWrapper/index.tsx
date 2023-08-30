@@ -9,7 +9,7 @@ const BoardWrapper = () => {
     <section className="h-screen grid grid-cols-4 gap-5">
       <div>sidebar</div>
       <div className=" col-span-2 mt-20">
-        <Title className={"text-4xl"}>게시판</Title>
+        <Title className={"text-4xl text-center"}>게시판</Title>
         <SearchBar />
         <MessageBoard />
 
