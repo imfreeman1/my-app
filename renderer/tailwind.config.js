@@ -30,6 +30,9 @@ module.exports = {
         imgBlack: "url('/img/black-1280.jpg')",
         bricks: "url('/img/brick2-640.jpg')",
       },
+      minHeight: {
+        "1/2": "50%",
+      },
     },
   },
   plugins: [],
