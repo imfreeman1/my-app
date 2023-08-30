@@ -21,14 +21,15 @@ const Write = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const test: BulletinType = {
+    const newBulletin: BulletinType = {
+      index: boardList.length + 1,
       id: uuidv4(),
       title,
       content,
       time: makeDateString(),
       count: 0,
     };
-    setBoardList([test, ...boardList]);
+    setBoardList([newBulletin, ...boardList]);
     router.back();
   };
   return (
