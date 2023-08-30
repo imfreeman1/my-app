@@ -5,7 +5,7 @@
 사용방법
 
 ```
-git clone <myProjectURL>
+git clone https://github.com/imfreeman1/nextron-typescript.git
 pnpm i
 pnpm run dev
 ```
@@ -37,11 +37,12 @@ pnpm run dev
 
 ### 게시판 작성 초기 계획
 
-- sideBar를 만들어 볼 예정.
-- next.js의 동적라우팅을 이용하여 게시글 랜더링 및 작성 페이지 관리.
-- class문법을 사용하여 state를 만들어 볼 예정.
-- Firebase에 DB 저장 해볼 예정.
-- route가 변경 될때 queryString도 변경.
+- [ ]sideBar를 만들어 볼 예정.
+- [x] next.js의 동적라우팅을 이용하여 게시글 랜더링 및 작성 페이지 관리.
+- [ ] class문법을 사용하여 state를 만들어 볼 예정.
+      필요 이상으로 복잡해질 가능성이 있을 것 같아 사용하지 않기로 하였음. 그래도 계획 덕분에 공부해 볼 수 있는 기회가 되어 좋았다.
+- [ ] Firebase에 DB 저장 해볼 예정.
+- [x] route가 변경 될때 queryString도 변경.
 
 ### 필요한 공부내용
 
@@ -53,7 +54,8 @@ pnpm run dev
 ### 현재 생각하는 게시글 State
 
 ```
-  const test = {
+  const Bulletin = {
+    index : number,
     id: uuid,
     title : string,
     content : string,
@@ -64,7 +66,11 @@ pnpm run dev
 
 이미지를 사용할지에 대해서는 더 고려해볼 필요가 있을 듯.
 
-### 현재 수정 예정 및 의문사항
+\*\*8/30 추가사항
+
+- 게시글의 순서를 나타내기 위해서는 index가 필요했고 State에 index를 추가하였음.
+
+### 현재 수정 예정 및 의문점
 
 - recoilState가 read only인데 이걸 굳이 class문법을 사용하여 한번더 캡슐화 할 필요가 있을까? 차라리 atomFamily를 통해 관리해보는 건 어떨지?
 
@@ -75,6 +81,11 @@ pnpm run dev
   navigate 기능에 대해 찾아봐야할 필요가 있음.
 
 - 현재 사용하는 id의 queryString이 너무 길다는 느낌이 있음.
+
+\*\* 8/30 추가
+
+- 반응형에 대해서도 구현해보는게 좋을 것 같음.
+- css에서 높이는 어떻게 결정되는 것일까?
 
 ### Todo (8/28 Start)
 
