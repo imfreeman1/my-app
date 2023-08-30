@@ -17,7 +17,7 @@ const Board = () => {
     <section className="h-screen grid grid-cols-4 gap-5">
       <div className="flex flex-col mt-20 col-start-2 col-span-2 w-full h-full">
         <div className="flex justify-between p-3 items-center border-b-2 gap-2 border-gray-500">
-          <h2 className="text-2xl">제목 : {findItem.title}</h2>
+          <h2 className="text-xl">{findItem.title}</h2>
           <div>
             <span className="text-gray-400 text-sm h-fit mr-2">
               {findItem.time}
