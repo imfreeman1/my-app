@@ -33,6 +33,9 @@ module.exports = {
       minHeight: {
         "1/2": "50%",
       },
+      width: {
+        "98%": "98%",
+      },
     },
   },
   plugins: [],
