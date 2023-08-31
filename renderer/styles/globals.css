@@ -9,7 +9,7 @@
 
 @layer base {
   body {
-    @apply bg-imgBlack text-white bg-cover;
+    @apply bg-imgBlack text-white bg-cover dark:bg-imgWhite dark:text-black;
   }
 }
 
