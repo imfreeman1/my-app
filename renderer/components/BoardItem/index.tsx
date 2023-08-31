@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { boardListAtom } from "../../recoil/board";
 import { BulletinType } from "../../recoil/board/type";
 import Button from "../Button";
+import dateSplit from "../../utils/dateSplit";
 
 const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   const [boardList, setBoardList] = useRecoilState(boardListAtom);
@@ -22,7 +23,7 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   };
   return (
     <li>
-      <div className="flex justify-between gap-3 items-center">
+      <div className="flex justify-between gap-4 items-center">
         <span className="text-gray-400 text-sm h-fit pb-2">
           {bulletin.index}
         </span>
@@ -33,9 +34,14 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
             </Link>
           </Button>
         </div>
-        <span className="text-gray-400 text-sm h-fit pb-2">
-          {bulletin.count}
-        </span>
+        <div className="flex gap-8">
+          <span className="text-gray-400 text-sm h-fit pb-2">
+            {dateSplit(bulletin.time)}
+          </span>
+          <span className="text-gray-400 text-sm h-fit pb-2">
+            {bulletin.count}
+          </span>
+        </div>
       </div>
     </li>
   );
