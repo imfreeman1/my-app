@@ -30,7 +30,7 @@ module.exports = {
         church: "url('/img/church-1280.jpg')",
         imgBlack: "url('/img/black-1280.jpg')",
         bricks: "url('/img/brick2-640.jpg')",
-        imgWhite: "url('/img/whiteBg.jpg')",
+        imgWhite: "url('/img/white-1280.png')",
       },
       minHeight: {
         "1/2": "50%",
