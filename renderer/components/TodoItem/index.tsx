@@ -78,7 +78,9 @@ const TodoItem = ({ todo }) => {
         {!modify ? (
           <>
             <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
-              <span className="font-semibold border-b-2">{todo.title}</span>
+              <span className="font-semibold border-b-2 block truncate ">
+                {todo.title}
+              </span>
               <span className="h-auto w-full  whitespace-pre-line inline-block">
                 {todo.content}
               </span>
