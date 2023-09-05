@@ -35,6 +35,13 @@ pnpm run dev
 
 - Next.js의 DynamicRouter를 사용하여 board Page를 동적으로 구성하였음.
 
+- React의 Hydrate
+  다시 공부하게 된 이유는 next-themes를 사용하던 중 theme 적용이 되지않는 문제가 생겼고, React Hydrate Error로 발생하지 않는다는 깃허브의 설명을 보고 이를 해결하기 위해 다시 공부하게 되었음.
+  React의 Hydrate는 Pre-Rendering된 HTML(UI가 그려진 상태이지만, 기능은 작동하지 않음)의 DOM에 JS의 이벤트가 자리를 찾아가는 과정을 Hydrate라고 말한다.
+  개인적인 추론으론 HTML의 DOM은 뼈대를 가지지만 기능은 할 수 없는 고체상태, JS는 기능은 할 수 있지만 interact할 뼈대가 없는 기체상태로 이미지하여
+  고체와 기체가 결합하면서 액체가 되는 과정을 Hydrate(수화)라고 표현한 것 같다.
+  액체는 형태도 가지면서 action이 발생할때 'React'가 발생한다. 그래서 interact 할 수 있는 상황이 마치 액체와 같다고 여겨 그렇게 표현하는 것으로 생각한다.
+
 ### 게시판 작성 초기 계획
 
 - [ ]sideBar를 만들어 볼 예정.
@@ -89,4 +96,10 @@ pnpm run dev
 
 ### Todo (8/28 Start)
 
-- husky를 사용해서 git hook을 사용해보자.
+- [ ] husky를 사용해서 git hook을 사용해보자.
+
+#### 8/31
+
+- [x] theme 적용 방법에 대해 공부
+- [x] 게시글 column 생성
+-
