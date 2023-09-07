@@ -8,11 +8,11 @@ import { ThemeProvider } from "next-themes";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-      <Layout>
-        <RecoilRoot>
+      <RecoilRoot>
+        <Layout>
           <Component {...pageProps} />
-        </RecoilRoot>
-      </Layout>
+        </Layout>
+      </RecoilRoot>
     </ThemeProvider>
   );
 }
