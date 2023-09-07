@@ -19,10 +19,13 @@ const Board = () => {
         <div className="flex justify-between px-3 py-5 items-center border-b-2 gap-2 border-gray-500">
           <h2 className="text-xl">{findItem.title}</h2>
           <div>
-            <span className="text-gray-300 text-sm h-fit mr-2">
+            <span className="text-gray-400 dark:text-gray-300 text-sm h-fit mr-2">
+              {findItem.date}
+            </span>
+            <span className="text-gray-400 dark:text-gray-300 text-sm h-fit mr-2">
               {findItem.time}
             </span>
-            <span className="text-gray-300 text-sm h-fit">
+            <span className="text-gray-400 dark:text-gray-300 text-sm h-fit">
               조회 : {findItem.count}
             </span>
           </div>
