@@ -6,10 +6,11 @@ import { boardListAtom } from "../../recoil/board";
 import { BulletinType } from "../../recoil/board/type";
 import Button from "../Button";
 import dateSplit from "../../utils/dateSplit";
+import dateStringMaker from "../../utils/dateUtils";
+import timeSplit from "../../utils/timeSplit";
 
 const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   const [boardList, setBoardList] = useRecoilState(boardListAtom);
-  console.log(boardList);
   const onClick = (id) => {
     let newBoardList: BulletinType[] = structuredClone(boardList);
     newBoardList = newBoardList.map((boardItem) => {
@@ -27,7 +28,7 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
         <span className="text-gray-400 text-sm h-fit pb-2">
           {bulletin.index}
         </span>
-        <div className="grow border-b-2 border-gray-500 m-2 pb-2">
+        <div className="grow border-b-2 border-gray-400 dark:border-gray-500 m-2 pb-2">
           <Button type="button" onClick={() => onClick(bulletin.id)}>
             <Link href="board/read/[id]" as={`board/read/${bulletin.id}`}>
               {bulletin.title}
@@ -36,7 +37,9 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
         </div>
         <div className="flex gap-8">
           <span className="text-gray-400 text-sm h-fit pb-2">
-            {dateSplit(bulletin.time)}
+            {dateStringMaker() === bulletin.date
+              ? timeSplit(bulletin.time)
+              : dateSplit(bulletin.date)}
           </span>
           <span className="text-gray-400 text-sm h-fit pb-2">
             {bulletin.count}
