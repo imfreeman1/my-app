@@ -42,6 +42,10 @@ pnpm run dev
   고체와 기체가 결합하면서 액체가 되는 과정을 Hydrate(수화)라고 표현한 것 같다.
   액체는 형태도 가지면서 action이 발생할때 'React'가 발생한다. 그래서 interact 할 수 있는 상황이 마치 액체와 같다고 여겨 그렇게 표현하는 것으로 생각한다.
 
+- ThemeProvider 문제
+  theme 적용을 위해 next-themes를 사용하였고, 처음 theme가 적용되지 않는 문제가 있었음. 이유를 몰라서 github 이슈도 확인해보고 예제를 따라 해봤으나 구현에 실패하였음. 작성해둔 코드를 보다가 ThemeProvider와 Layout의 부모자식관계를 변경하였더니 문제가 해결되었음.
+  provider를 통해 전체에 theme를 공급하여야 하는 것이였으나, 이를 제대로 사용하지 못하였음을 알게 되었음.
+
 ### 게시판 작성 초기 계획
 
 - [ ]sideBar를 만들어 볼 예정.
@@ -102,4 +106,5 @@ pnpm run dev
 
 - [x] theme 적용 방법에 대해 공부
 - [x] 게시글 column 생성
+
 -
