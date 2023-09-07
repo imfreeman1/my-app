@@ -7,6 +7,7 @@ import { boardListAtom } from "../../recoil/board";
 import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
 import makeDateString from "../../utils/dateUtils";
+import timeStringMaker from "../../utils/timeUtils";
 
 const Write = () => {
   const router = useRouter();
@@ -26,7 +27,8 @@ const Write = () => {
       id: uuidv4(),
       title,
       content,
-      time: makeDateString(),
+      date: makeDateString(),
+      time: timeStringMaker(),
       count: 0,
     };
     setBoardList([newBulletin, ...boardList]);
