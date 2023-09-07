@@ -7,13 +7,13 @@ import { ThemeProvider } from "next-themes";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <ThemeProvider attribute="class">
+    <ThemeProvider attribute="class">
+      <Layout>
         <RecoilRoot>
           <Component {...pageProps} />
         </RecoilRoot>
-      </ThemeProvider>
-    </Layout>
+      </Layout>
+    </ThemeProvider>
   );
 }
 
