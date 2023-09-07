@@ -7,14 +7,13 @@ const SearchBar = () => {
   return (
     <div className=" my-2">
       <form className="flex justify-center gap-2">
-        {
-          // 여기에 option selector 넣을거
-        }
-        <Input
-          className="p-1 w-1/2 rounded-md"
-          type="text"
-          placeholder="검색"
-        />
+        <div className="w-fit">
+          <select className="rounded-md p-2 h-full mr-1">
+            <option>제목</option>
+          </select>
+          <Input className="p-2 rounded-md" type="text" placeholder="검색" />
+        </div>
+
         <Button type="button" className="p-1">
           <AiOutlineSearch size={30} />
         </Button>
