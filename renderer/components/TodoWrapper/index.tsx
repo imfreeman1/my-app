@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Card from "../Card";
 import Title from "../Title";
 import AntForm from "../AntForm";
@@ -33,7 +33,7 @@ const TodoWrapper = () => {
         return (
           <Card key={idx} className={className}>
             <Title className={titleClass}>{title}</Title>
-            {childTag}
+            <Suspense fallback=<div></div>>{childTag}</Suspense>
           </Card>
         );
       })}
