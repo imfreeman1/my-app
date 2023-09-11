@@ -25,10 +25,10 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   return (
     <li>
       <div className="flex justify-between gap-4 items-center">
-        <span className="text-gray-400 text-sm h-fit pb-2">
+        <span className="text-gray-400 dark:text-gray-200 text-sm h-fit pb-2">
           {bulletin.index}
         </span>
-        <div className="grow border-b-2 border-gray-400 dark:border-gray-500 m-2 pb-2">
+        <div className="grow border-b-2 border-gray-400 dark:border-gray-500 m-2 pb-2 font-bold">
           <Button type="button" onClick={() => onClick(bulletin.id)}>
             <Link href="board/read/[id]" as={`board/read/${bulletin.id}`}>
               {bulletin.title}
@@ -36,12 +36,12 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
           </Button>
         </div>
         <div className="flex gap-8">
-          <span className="text-gray-400 text-sm h-fit pb-2">
+          <span className="text-gray-400 dark:text-gray-200 text-sm h-fit pb-2">
             {dateStringMaker() === bulletin.date
               ? timeSplit(bulletin.time)
               : dateSplit(bulletin.date)}
           </span>
-          <span className="text-gray-400 text-sm h-fit pb-2">
+          <span className="text-gray-400 dark:text-gray-200 text-sm h-fit pb-2">
             {bulletin.count}
           </span>
         </div>

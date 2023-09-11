@@ -22,7 +22,7 @@ const NavigationBar = ({ navList, isWhite }: NavigationBarType<string>) => {
         </Button>
       </div>
 
-      <ul className="flex justify-center gap-6 h-16 w-fit items-center">
+      <ul className="flex justify-center gap-6 h-16 w-fit items-center font-semibold">
         {navList.map((nav, idx) => {
           return <NavItem key={idx} content={nav} className={NavItemClass} />;
         })}
