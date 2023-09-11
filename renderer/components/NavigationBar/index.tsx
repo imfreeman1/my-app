@@ -29,8 +29,8 @@ const NavigationBar = ({ navList, isWhite }: NavigationBarType<string>) => {
       </ul>
       <div className="flex gap-3 items-center">
         <Button className="nav-btn-white p-3" type="button">
-          <Link href={"https://github.com/imfreeman1"} target="_blank">
-            <a>
+          <Link href={"https://github.com/imfreeman1"}>
+            <a target="_blank">
               <AiFillGithub size={24} />
             </a>
           </Link>
