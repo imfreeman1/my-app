@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { boardListAtom } from "../../recoil/board";
+import { boardListAtom, searchShowBoardListState } from "../../recoil/board";
 import BoardItem from "../BoardItem";
 import BoardColumn from "../BoardColumn";
 import Button from "../Button";
+import listSlicer from "../../utils/listSlicer";
+import { MessageBoardType } from "./type";
 
-const MessageBoard = () => {
+const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
   const boardList = useRecoilValue(boardListAtom);
-  const [number, setNumber] = useState<number>(1);
-  const [numberList, setNumberList] = useState<number[]>([]);
-  const showBoardList = boardList.slice(6 * (number - 1), 6 * number);
+  const [showPageNumber, setShowPageNumber] = useState<number>(1);
+  const [showPageNumberList, setShowPageNumberList] = useState<number[]>([]);
+  const newBoardList =
+    useRecoilValue(searchShowBoardListState(selectorOption)) || boardList;
+  const showBoardList = listSlicer(newBoardList, 6, showPageNumber);
   useEffect(() => {
     const makeNumberList = () => {
-      let count = Math.ceil(boardList.length / 6) || 1;
-      setNumberList(
+      let count = Math.ceil(newBoardList.length / 6) || 1;
+      setShowPageNumberList(
         Array(count)
           .fill("")
-          .map((val, idx) => idx + 1)
+          .map((_, idx) => idx + 1)
       );
     };
     makeNumberList();
-  }, [boardList]);
+  }, [newBoardList]);
 
   return (
     <div className="flex flex-col items-center my-4">
@@ -34,14 +38,15 @@ const MessageBoard = () => {
           </ol>
         </div>
         <div className="flex justify-center gap-2 items-end">
-          {numberList.map((val) => {
+          {showPageNumberList.map((val, idx) => {
             return (
               <Button
+                key={idx}
                 className={`${
-                  number === val ? "text-xl font-bold" : "text-base"
+                  showPageNumber === val ? "text-xl font-bold" : "text-base"
                 }`}
                 type="button"
-                onClick={() => setNumber(val)}
+                onClick={() => setShowPageNumber(val)}
               >
                 {val}
               </Button>
