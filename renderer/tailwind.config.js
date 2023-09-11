@@ -1,6 +1,7 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
+  darkMode: "class",
   content: [
     "./renderer/pages/**/*.{js,ts,jsx,tsx}",
     "./renderer/components/**/*.{js,ts,jsx,tsx}",
@@ -29,6 +30,13 @@ module.exports = {
         church: "url('/img/church-1280.jpg')",
         imgBlack: "url('/img/black-1280.jpg')",
         bricks: "url('/img/brick2-640.jpg')",
+        imgWhite: "url('/img/white-1280.png')",
+      },
+      minHeight: {
+        "1/2": "50%",
+      },
+      width: {
+        "98%": "98%",
       },
     },
   },

@@ -4,7 +4,7 @@ import { defaultTodoType } from "./type";
 const defaultTodoList: defaultTodoType[] = [];
 
 const todoListAtom = atom({
-  key: "todoListAtom",
+  key: "todoListState",
   default: defaultTodoList,
 });
 

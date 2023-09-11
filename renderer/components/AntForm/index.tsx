@@ -52,6 +52,7 @@ const AntForm = () => {
             cols={18}
             rows={4}
             value={content}
+            style={{ resize: "none" }}
           />
         </Form.Item>
         <div className="flex justify-evenly">
