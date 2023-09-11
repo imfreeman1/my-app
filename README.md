@@ -107,4 +107,13 @@ pnpm run dev
 - [x] theme 적용 방법에 대해 공부
 - [x] 게시글 column 생성
 
--
+### 9/7
+
+- 문제점 1 : 이상할 정도로 todoList가 무거움.. 이유가 뭘까?
+
+### 9/11
+
+- selectorFamily를 이용하여 param을 받고 getState를 변경하는 작업을 실행하였음.
+- selectorFamily를 사용해보니 초기에 state를 깊은복사하여 수정하였던 기존의 로직에서 Setter 함수를 사용하여 수정하는 방식으로 변경하여도 될 것 같다는 생각이 들었음. (진행해볼 예정)
+- SearchBar와 MessageBoard를 연결하는 과정에서 selectorFamily의 param이 없을 경우 에러가 발생하는 상황이 있었음. 이것에 대해 좀 더 공부해보고 상세히 에러가 발생했던 과정을 작성해볼 생각.
+- 생각보다 깔끔하지 않은 로직들이 많다는 생각이 듦. 이것도 조정이 필요함.
