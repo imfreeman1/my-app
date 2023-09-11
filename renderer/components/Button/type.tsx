@@ -1,5 +1,3 @@
-import { DetailedHTMLProps } from "react";
-
 export interface IButton {
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
