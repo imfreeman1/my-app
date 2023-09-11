@@ -44,14 +44,14 @@ const Write = () => {
               <Input
                 value={title}
                 type={"text"}
-                className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1"
+                className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
                 onChange={(e) => onChange(e, setTitle)}
               />
             </label>
             <textarea
               onChange={(e) => onChange(e, setContent)}
               value={content}
-              className="resize-none mt-3 overflow-auto border-2 border-gray-300 rounded-md py-2 px-3"
+              className="resize-none mt-3 overflow-auto border-2 border-gray-300 rounded-md py-2 px-3 bg-white"
               rows={12}
               cols={60}
             />
