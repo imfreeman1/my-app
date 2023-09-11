@@ -6,7 +6,7 @@ import MessageBoard from "../MessageBoard";
 import { selectorOptType } from "./type";
 
 const BoardWrapper = () => {
-  const [selectorOption, setSelectorOption] = useState<selectorOptType>();
+  const [selectorOption, setSelectorOption] = useState<selectorOptType>(null);
   return (
     <section className="h-screen grid grid-cols-4 gap-5">
       <div>sidebar</div>
