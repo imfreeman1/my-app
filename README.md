@@ -54,6 +54,7 @@ pnpm run dev
       필요 이상으로 복잡해질 가능성이 있을 것 같아 사용하지 않기로 하였음. 그래도 계획 덕분에 공부해 볼 수 있는 기회가 되어 좋았다.
 - [ ] Firebase에 DB 저장 해볼 예정.
 - [x] route가 변경 될때 queryString도 변경.
+
 ### 필요한 공부내용
 
 - [ ] 게시판 Layout 구성에 대한 reference가 필요함.
@@ -61,6 +62,7 @@ pnpm run dev
 - [x] next.js의 동적라우팅 기능에 대해 알아볼 필요 있음.
 - [ ] Firebase 공부.
 - [x] class문법 공부.
+
 ### 현재 생각하는 게시글 State
 
 ```
@@ -116,3 +118,21 @@ pnpm run dev
 - selectorFamily를 사용해보니 초기에 state를 깊은복사하여 수정하였던 기존의 로직에서 Setter 함수를 사용하여 수정하는 방식으로 변경하여도 될 것 같다는 생각이 들었음. (진행해볼 예정)
 - SearchBar와 MessageBoard를 연결하는 과정에서 selectorFamily의 param이 없을 경우 에러가 발생하는 상황이 있었음. 이것에 대해 좀 더 공부해보고 상세히 에러가 발생했던 과정을 작성해볼 생각.
 - 생각보다 깔끔하지 않은 로직들이 많다는 생각이 듦. 이것도 조정이 필요함.
+
+### 9/13
+
+- 꽤 오랫동안 tailwindCSS를 사용하였더니, 기본 css문법을 사용하는게 어색했다.
+- react-icon에 css를 적용하는 방법에 대해서 알게 되었음.
+
+```
+<IconContext.Provider value={{<your value>}}>
+  <ICON TAG>
+<IconContext.Provider>
+```
+
+위의 형태로 사용할 ICON TAG를 감싼 후, 넘겨줄 value를 설정. value는 객체를 받고, 객체의 key는 className, style, size, color, attr, title
+의 값이 있음.
+처음에는 className으로 tailwindCSS를 넘겨주려고 하였으나, 작동하지 않음.
+그래서 css를 사용하여 icon에 hover기능을 적용.
+(이런 일들이 종종 있어서 styledComponent와 tailwindCSS를 같이 사용하는 경우가 있는 듯 하다.)
+오랜만에 css를 작성해본 좋은 경험이였다.
