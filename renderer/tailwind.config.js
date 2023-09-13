@@ -38,6 +38,9 @@ module.exports = {
       width: {
         "98%": "98%",
       },
+      borderWidth: {
+        1: "1px",
+      },
     },
   },
   plugins: [],

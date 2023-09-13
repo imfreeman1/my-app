@@ -5,26 +5,28 @@ import { AiFillGithub, AiFillHome } from "react-icons/ai";
 import Link from "next/link";
 import Button from "../Button";
 import { useTheme } from "next-themes";
+import { IconContext } from "react-icons";
 
-const NavigationBar = ({ navList, isWhite }: NavigationBarType<string>) => {
-  const NavItemClass = isWhite ? "nav-btn-white" : "nav-btn";
+const NavigationBar = ({ navList }: NavigationBarType<string>) => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex justify-between items-center px-6">
+    <div className="flex justify-between items-center px-6 bg-black text-white dark:bg-white dark:text-white h-24">
       <div className=" w-20">
-        <Button className="nav-btn-white" type="button">
-          <Link href="/home">
-            <a>
-              <AiFillHome size={24} />
-            </a>
-          </Link>
-        </Button>
+        <IconContext.Provider value={{ className: "icon-btn" }}>
+          <Button type="button">
+            <Link href="/home">
+              <a>
+                <AiFillHome size={24} />
+              </a>
+            </Link>
+          </Button>
+        </IconContext.Provider>
       </div>
 
-      <ul className="flex justify-center gap-6 h-16 w-fit items-center font-semibold">
+      <ul className="flex justify-center gap-24 h-16 w-fit items-center font-semibold">
         {navList.map((nav, idx) => {
-          return <NavItem key={idx} content={nav} className={NavItemClass} />;
+          return <NavItem key={idx} content={nav} />;
         })}
       </ul>
       <div className="flex gap-3 items-center">

@@ -68,7 +68,7 @@ const TodoItem = ({ todo }) => {
 
   return (
     <li className="m-2">
-      <div className="bg-baseWhite text-black flex gap-1 w-60 h-36 rounded-md p-2 items-center">
+      <div className="bg-white text-black flex gap-1 w-60 h-36 rounded-md p-2 items-center shadow-md border-1 border-gray-100">
         <Input
           type="checkbox"
           className="w-8 h-5"
@@ -78,7 +78,7 @@ const TodoItem = ({ todo }) => {
         {!modify ? (
           <>
             <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
-              <span className="font-semibold border-b-2 block truncate ">
+              <span className="font-semibold border-b-1 block truncate pb-1">
                 {todo.title}
               </span>
               <span className="h-auto w-full  whitespace-pre-line inline-block">

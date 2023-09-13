@@ -15,19 +15,19 @@ const SearchBar: React.FC<SearchBarType> = ({ setSelectorOption }) => {
   return (
     <div className=" my-2">
       <form
-        className="flex justify-center gap-2"
+        className="flex justify-center gap-1"
         onSubmit={(e) => searchOptionSubmit(e)}
       >
         <div className="w-fit">
           <select
-            className="rounded-md p-2 h-full mr-1"
+            className="rounded-md p-2 h-full mr-1 border-1 shadow-sm dark:shadow-gray-400"
             onChange={({ target }) => setOption(target.value)}
           >
             <option value="title">제목</option>
             <option value="content">글 내용</option>
           </select>
           <Input
-            className="p-2 rounded-md"
+            className="p-2 rounded-md border-1 shadow-sm dark:shadow-gray-400"
             type="text"
             value={keyword}
             onChange={({ target }) => setKeyword(target.value)}

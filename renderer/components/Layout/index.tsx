@@ -6,7 +6,7 @@ import Footer from "../Footer";
 const Layout = ({ children }) => {
   return (
     <>
-      <NavigationBar navList={NAVIGATOR_CONSTANT.list} isWhite={true} />
+      <NavigationBar navList={NAVIGATOR_CONSTANT.list} />
       <main>{children}</main>
       <Footer></Footer>
     </>

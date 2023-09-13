@@ -28,7 +28,7 @@ const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
 
   return (
     <div className="flex flex-col items-center my-4">
-      <div className="w-full border-2 border-gray-400 rounded-md p-4 relative">
+      <div className="w-full border-2 border-black dark:border-gray-400 rounded-md p-4 relative shadow-lgxxxxx">
         <BoardColumn />
         <div className="mt-7 h-80">
           <ol>

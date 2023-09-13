@@ -7,23 +7,24 @@ import TodoContainer from "../TodoContainer";
 const TodoWrapper = () => {
   const cardList = [
     {
-      className: "default-card h-fit bg-white",
+      className:
+        "default-card h-fit bg-white shadow-xl border-1 border-gray-100",
       title: "할일",
       titleClass: "text-black",
       childTag: <AntForm />,
     },
     {
-      className: "default-card h-full w-72 bg-bricks",
+      className:
+        "default-card h-full w-72 bg-white shadow-xl border-1 border-gray-100",
       title: "진행 중",
-      titleClass:
-        "text-white text-2xl bg-gray-400 py-1 px-3 rounded-md drop-shadow-xl",
+      titleClass: "text-black text-2xl py-1 px-3",
       childTag: <TodoContainer completed={false} />,
     },
     {
-      className: "default-card h-full w-72 bg-bricks",
+      className:
+        "default-card h-full w-72 bg-white shadow-xl border-1 border-gray-100",
       title: "완료",
-      titleClass:
-        "text-white text-2xl bg-blue-600 py-1 px-3 rounded-md drop-shadow-xl",
+      titleClass: "text-black text-2xl py-1 px-3",
       childTag: <TodoContainer completed={true} />,
     },
   ];

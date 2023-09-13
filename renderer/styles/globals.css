@@ -9,16 +9,37 @@
 
 @layer base {
   body {
-    @apply dark:bg-imgBlack dark:text-white bg-cover bg-imgWhite text-black;
+    @apply dark:bg-gray-950 dark:text-white bg-cover bg-white text-black;
+  }
+}
+.icon-btn {
+  color:white;
+  transition: all linear 1000ms;
+  -webkit-transition: all linear 1000ms;
+  -moz-transition: all linear 1000ms;
+  -ms-transition: all linear 1000ms;
+  -o-transition: all linear 1000ms;
+}
+.icon-btn:hover {
+  color: rgb(147 197 253);
+  transition: all linear 1000ms;
+  width: 50px;
+  height: 50px;
+  -webkit-transition: all linear 1000ms;
+  -moz-transition: all linear 1000ms;
+  -ms-transition: all linear 1000ms;
+  -o-transition: all linear 1000ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-btn{
+    color:black
   }
 }
 
 @layer components {
-  .nav-btn-white {
-    @apply hover:text-lg duration-1000 w-fit;
-  }
   .nav-btn {
-    @apply text-black hover:text-lg duration-1000 w-fit;
+    @apply text-white hover:text-4xl text-2xl duration-1000 ease-linear w-fit hover:text-blue-300;
   }
   .btn-blue {
     @apply text-white font-bold px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 duration-300;
