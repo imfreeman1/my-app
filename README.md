@@ -10,6 +10,12 @@ pnpm i
 pnpm run dev
 ```
 
+이 프로젝트에 사용된 기술 :
+
+```
+ Next.js electron typescript dotenv tailwindCSS AntDesign React-icon
+```
+
 ### 프로젝트 수행 과정에서 어려웠던 점.
 
 - Atom을 list로 만들어서 수정기능을 작성할 때 property가 read only라 수정이 안되는 문제가 발생하여서, JS 내장 함수 structuredClone()을 사용하여 깊은 복사를 하여 복사된 리스트를 수정하고 리스트를 변경하는 방식으로 진행하였음. (\*Selector에서 Set함수를 잘 사용한다면 이런 방식이 아니더라도 해결할 수 있지 않을까 하는 생각이 들었음.)
@@ -43,8 +49,39 @@ pnpm run dev
   액체는 형태도 가지면서 action이 발생할때 'React'가 발생한다. 그래서 interact 할 수 있는 상황이 마치 액체와 같다고 여겨 그렇게 표현하는 것으로 생각한다.
 
 - ThemeProvider 문제
-  theme 적용을 위해 next-themes를 사용하였고, 처음 theme가 적용되지 않는 문제가 있었음. 이유를 몰라서 github 이슈도 확인해보고 예제를 따라 해봤으나 구현에 실패하였음. 작성해둔 코드를 보다가 ThemeProvider와 Layout의 부모자식관계를 변경하였더니 문제가 해결되었음.
-  provider를 통해 전체에 theme를 공급하여야 하는 것이였으나, 이를 제대로 사용하지 못하였음을 알게 되었음.
+
+  - theme 적용을 위해 next-themes를 사용하였고, 처음 theme가 적용되지 않는 문제가 있었음. 이유를 몰라서 github 이슈도 확인해보고 예제를 따라 해봤으나 구현에 실패하였음. 작성해둔 코드를 보다가 ThemeProvider와 Layout의 부모자식관계를 변경하였더니 문제가 해결되었음.
+    provider를 통해 전체에 theme를 공급하여야 하는 것이였으나, 이를 제대로 사용하지 못하였음을 알게 되었음.
+
+- dotenv 사용 당시 어려웠던 점
+
+  1. 서버를 실행중 서버를 종료하지 않고 dotenv를 설치하고자 하였음. 그래서 터미널을 하나 더 열고 새로 연 터미널에서 install을 진행
+
+  ```
+  pnpm i dotenv
+  ```
+
+  설치가 되는 과정을 확인하였으나, 나중에 확인해보니 package.json에
+
+  ```
+  dotenv: '^0.0.0'
+  ```
+
+  로 설치되어 있는 것을 확인 할 수 있었음. 그래서 서버를 끄고 다시 설치하자 제대로 설치가 되는 것을 확인할 수 있었음.
+
+  2. .env파일이 root에 있어야 한다는 글을 읽고 renderer 폴더 밖으로 옮긴 후 로깅을 하였더니 환경변수가 전부 undefined.
+     정확한 이유를 잘 모르겠음. electron에서 frontend의 root는 renderer 폴더인 것 같음 **추후 더 공부해야할 내용**
+  3. .env File 내부 작성은
+
+  ```
+  NEXT_PUBLIC_API_KEY = <uerAPIKEY>
+  ```
+
+  의 형태로 따옴표( ', " )나 콤마( , )를 사용하지 않아야함.
+  따옴표나 콤마를 사용하면 환경변수에 콤마와 따옴표가 포함되게 된다.
+
+  4. .env 파일 내부 내용이 변경되면 항상 서버를 재실행 해줄 것.
+     그렇지 않으면 내용변경이 적용되지 않음. 이유는 애플리케이션 실행 시 한번만 읽기 때문이다.
 
 ### 게시판 작성 초기 계획
 
@@ -57,10 +94,9 @@ pnpm run dev
 
 ### 필요한 공부내용
 
-- [ ] 게시판 Layout 구성에 대한 reference가 필요함.
-
+- [x] 게시판 Layout 구성에 대한 reference가 필요함.
 - [x] next.js의 동적라우팅 기능에 대해 알아볼 필요 있음.
-- [ ] Firebase 공부.
+- [x] Firebase 공부.
 - [x] class문법 공부.
 
 ### 현재 생각하는 게시글 State
@@ -82,9 +118,24 @@ pnpm run dev
 
 - 게시글의 순서를 나타내기 위해서는 index가 필요했고 State에 index를 추가하였음.
 
+\*\* 현재의 Bulletin 의 타입
+
+```
+interface BulletinType {
+  index: number,
+  id: string,
+  title: string,
+  date: string,
+  time: string,
+  count: string
+}
+```
+
+으로 작성 하였음.
+
 ### 현재 수정 예정 및 의문점
 
-- recoilState가 read only인데 이걸 굳이 class문법을 사용하여 한번더 캡슐화 할 필요가 있을까? 차라리 atomFamily를 통해 관리해보는 건 어떨지?
+- [x] recoilState가 read only인데 이걸 굳이 class문법을 사용하여 한번더 캡슐화 할 필요가 있을까? 차라리 atomFamily를 통해 관리해보는 건 어떨지?
 
 - sideBar에 들어가야할 내용 정하기
 
