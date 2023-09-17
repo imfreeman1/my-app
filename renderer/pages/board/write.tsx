@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
 import makeDateString from "../../utils/dateUtils";
 import timeStringMaker from "../../utils/timeUtils";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Write = () => {
   const router = useRouter();
@@ -20,19 +22,23 @@ const Write = () => {
   const onclick = () => {
     router.back();
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const newBulletin: BulletinType = {
-      index: boardList.length + 1,
-      id: uuidv4(),
-      title,
-      content,
-      date: makeDateString(),
-      time: timeStringMaker(),
-      count: 0,
-    };
-    setBoardList([newBulletin, ...boardList]);
-    router.back();
+    try {
+      const newBulletin: BulletinType = {
+        index: boardList.length + 1,
+        id: uuidv4(),
+        title,
+        content,
+        date: makeDateString(),
+        time: timeStringMaker(),
+        count: 0,
+      };
+      const test = await addDoc(collection(db, "portpolioDB"), newBulletin);
+      console.log(test);
+      setBoardList([newBulletin, ...boardList]);
+      router.back();
+    } catch (error) {}
   };
   return (
     <section className="h-screen grid grid-cols-4 gap-5">

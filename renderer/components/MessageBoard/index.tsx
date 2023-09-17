@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { boardListAtom, searchShowBoardListState } from "../../recoil/board";
 import BoardItem from "../BoardItem";
 import BoardColumn from "../BoardColumn";
 import Button from "../Button";
 import listSlicer from "../../utils/listSlicer";
 import { MessageBoardType } from "./type";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
-  const boardList = useRecoilValue(boardListAtom);
+  const [boardList, setBoardList] = useRecoilState(boardListAtom);
   const [showPageNumber, setShowPageNumber] = useState<number>(1);
   const [showPageNumberList, setShowPageNumberList] = useState<number[]>([]);
   const newBoardList =
     useRecoilValue(searchShowBoardListState(selectorOption)) || boardList;
   const showBoardList = listSlicer(newBoardList, 6, showPageNumber);
+
+  useEffect(() => {
+    const test = async () => {
+      try {
+        const newArray = [];
+        const res = await getDocs(collection(db, "portpolioDB"));
+        res.forEach((val) => newArray.push(val.data()));
+        newArray.sort((a, b) => b.index - a.index);
+        setBoardList(newArray);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // 좀 더 좋은 방법이 없을려나..
+    test();
+  }, []);
+
   useEffect(() => {
     const makeNumberList = () => {
       let count = Math.ceil(newBoardList.length / 6) || 1;
