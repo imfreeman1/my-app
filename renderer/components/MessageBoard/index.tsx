@@ -6,32 +6,20 @@ import BoardColumn from "../BoardColumn";
 import Button from "../Button";
 import listSlicer from "../../utils/listSlicer";
 import { MessageBoardType } from "./type";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import useBoardQuery from "../../queries/useBoardQuery";
+
+// 실제로 boardList가 사용되는 곳은 없음. newBoardList로 내용들이 관리된다! setter도 통신과정에서 한번 사용됨.
+// 그렇다면 이걸 selector로 옮겨서 가져오는게 좋을 것 같고, useEffect로 그려내는게 좋으려나..
 
 const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
   const [boardList, setBoardList] = useRecoilState(boardListAtom);
+  useBoardQuery(setBoardList);
+
   const [showPageNumber, setShowPageNumber] = useState<number>(1);
   const [showPageNumberList, setShowPageNumberList] = useState<number[]>([]);
   const newBoardList =
     useRecoilValue(searchShowBoardListState(selectorOption)) || boardList;
   const showBoardList = listSlicer(newBoardList, 6, showPageNumber);
-
-  useEffect(() => {
-    const test = async () => {
-      try {
-        const newArray = [];
-        const res = await getDocs(collection(db, "portpolioDB"));
-        res.forEach((val) => newArray.push(val.data()));
-        newArray.sort((a, b) => b.index - a.index);
-        setBoardList(newArray);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // 좀 더 좋은 방법이 없을려나..
-    test();
-  }, []);
 
   useEffect(() => {
     const makeNumberList = () => {
@@ -47,7 +35,7 @@ const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
 
   return (
     <div className="flex flex-col items-center my-4">
-      <div className="w-full border-2 border-black dark:border-gray-400 rounded-md p-4 relative shadow-lgxxxxx">
+      <div className="w-full border-2 border-black dark:border-gray-400 rounded-md p-4 relative shadow-lg">
         <BoardColumn />
         <div className="mt-7 h-80">
           <ol>
