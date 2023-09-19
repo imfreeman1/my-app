@@ -13,11 +13,15 @@ const NavigationBar = ({ navList }: NavigationBarType<string>) => {
   return (
     <div className="flex justify-between items-center px-6 bg-black text-white dark:bg-white dark:text-white h-24">
       <div className=" w-20">
-        <IconContext.Provider value={{ className: "icon-btn" }}>
+        <IconContext.Provider
+          value={{
+            className: "icon-btn",
+          }}
+        >
           <Button type="button">
             <Link href="/home">
               <a>
-                <AiFillHome size={24} />
+                <AiFillHome />
               </a>
             </Link>
           </Button>
@@ -30,13 +34,15 @@ const NavigationBar = ({ navList }: NavigationBarType<string>) => {
         })}
       </ul>
       <div className="flex gap-3 items-center">
-        <Button className="nav-btn-white p-3" type="button">
-          <Link href={"https://github.com/imfreeman1"}>
-            <a target="_blank">
-              <AiFillGithub size={24} />
-            </a>
-          </Link>
-        </Button>
+        <IconContext.Provider value={{ className: "icon-btn" }}>
+          <Button type="button">
+            <Link href={"https://github.com/imfreeman1"}>
+              <a target="_blank">
+                <AiFillGithub />
+              </a>
+            </Link>
+          </Button>
+        </IconContext.Provider>
         <select
           value={theme}
           className="bg-gray-700 text-white p-1 rounded-md"
