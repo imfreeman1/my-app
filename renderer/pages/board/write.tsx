@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { boardListAtom } from "../../recoil/board";
 import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
@@ -15,14 +15,14 @@ const Write = () => {
   const router = useRouter();
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [boardList, setBoardList] = useRecoilState(boardListAtom);
+  const boardList = useRecoilValue(boardListAtom);
   const onChange = ({ target }, callBack: Function) => {
     callBack(target.value);
   };
   const onclick = () => {
     router.back();
   };
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     try {
       const newBulletin: BulletinType = {
@@ -34,9 +34,7 @@ const Write = () => {
         time: timeStringMaker(),
         count: 0,
       };
-      const test = await addDoc(collection(db, "portpolioDB"), newBulletin);
-      console.log(test);
-      setBoardList([newBulletin, ...boardList]);
+      await addDoc(collection(db, "portpolioDB"), newBulletin);
       router.back();
     } catch (error) {}
   };
