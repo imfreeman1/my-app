@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     <>
       <NavigationBar navList={NAVIGATOR_CONSTANT.list} />
       <main>{children}</main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };
