@@ -8,9 +8,8 @@ import { selectorOptType } from "./type";
 const BoardWrapper = () => {
   const [selectorOption, setSelectorOption] = useState<selectorOptType>(null);
   return (
-    <section className="h-screen grid grid-cols-4 gap-5">
-      <div>sidebar</div>
-      <div className=" col-span-2 mt-20 flex flex-col min-h-1/2">
+    <section className="h-11/12 grid grid-cols-4 gap-5 pb-28">
+      <div className=" col-start-2 col-span-2 mt-20 flex flex-col min-h-1/2">
         <Title className={"text-4xl text-center"}>게시판</Title>
         <SearchBar setSelectorOption={setSelectorOption} />
         <MessageBoard selectorOption={selectorOption} />
