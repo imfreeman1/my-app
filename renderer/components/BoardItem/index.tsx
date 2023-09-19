@@ -36,7 +36,7 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
           </Button>
         </div>
         <div className="flex gap-8">
-          <span className="text-gray-700 dark:text-gray-200 text-sm h-fit pb-2">
+          <span className="text-gray-700 dark:text-gray-200 text-sm h-fit pb-2 w-10 text-center">
             {dateStringMaker() === bulletin.date
               ? timeSplit(bulletin.time)
               : dateSplit(bulletin.date)}
