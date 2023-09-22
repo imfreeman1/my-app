@@ -8,19 +8,26 @@ import Button from "../Button";
 import dateSplit from "../../utils/dateSplit";
 import dateStringMaker from "../../utils/dateUtils";
 import timeSplit from "../../utils/timeSplit";
+import { doc, increment, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   const [boardList, setBoardList] = useRecoilState(boardListAtom);
-  const onClick = (id: string) => {
-    let newBoardList: BulletinType[] = structuredClone(boardList);
-    newBoardList = newBoardList.map((boardItem) => {
-      if (id === boardItem.id) {
-        boardItem.count += 1;
-        return boardItem;
-      }
-      return boardItem;
+  // onClick를 통해 통신해서 boardItem의 count를 올릴 필요가 있음. firebase의 query 내부에 Where을 사용해야할 듯.
+  const onClick = async (id: string) => {
+    const countRef = doc(db, "board", bulletin.id);
+    await updateDoc(countRef, {
+      count: increment(1),
     });
-    setBoardList(newBoardList);
+    // let newBoardList: BulletinType[] = structuredClone(boardList);
+    // newBoardList = newBoardList.map((boardItem) => {
+    //   if (id === boardItem.id) {
+    //     boardItem.count += 1;
+    //     return boardItem;
+    //   }
+    //   return boardItem;
+    // });
+    // setBoardList(newBoardList);
   };
   return (
     <li>
@@ -28,7 +35,7 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
         <span className="text-gray-700 dark:text-gray-200 text-sm h-fit pb-2">
           {bulletin.index}
         </span>
-        <div className="grow border-b-1 border-gray-400 dark:border-gray-500 m-2 pb-2 font-bold">
+        <div className="grow border-b-1 border-gray-200 dark:border-gray-100 m-2 pb-2 font-bold">
           <Button type="button" onClick={() => onClick(bulletin.id)}>
             <Link href="board/read/[id]" as={`board/read/${bulletin.id}`}>
               {bulletin.title}
