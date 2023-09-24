@@ -52,7 +52,7 @@
     @apply text-white hover:text-4xl text-2xl duration-1000 ease-out w-fit hover:text-blue-300;
   }
   .btn-blue {
-    @apply text-white font-bold px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 duration-300;
+    @apply text-white font-bold px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 duration-300 disabled:opacity-60;
   }
   .btn-white {
     @apply font-bold px-4 py-2 rounded bg-white hover:bg-gray-100 duration-300;
