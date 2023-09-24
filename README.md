@@ -187,3 +187,7 @@ interface BulletinType {
 그래서 css를 사용하여 icon에 hover기능을 적용.
 (이런 일들이 종종 있어서 styledComponent와 tailwindCSS를 같이 사용하는 경우가 있는 듯 하다.)
 오랜만에 css를 작성해본 좋은 경험이였다.
+
+### 9/19
+
+- 통신 코드를 정리하고자 React-Query를 공부하고 사용하였음. React-Query를 사용하면 middleware를 따로 작성하고 관리하지 않아도 되고
