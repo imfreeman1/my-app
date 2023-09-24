@@ -60,7 +60,7 @@ const AntForm = () => {
             className="btn-blue"
             type="submit"
             onClick={submitTodo}
-            disabled={title.length && content.length ? false : true}
+            disabled={title && content ? false : true}
           >
             {"완료"}
           </Button>
@@ -68,7 +68,7 @@ const AntForm = () => {
             className="btn-white"
             type="button"
             onClick={cancelHandler}
-            disabled={title.length || content.length ? false : true}
+            disabled={title || content ? false : true}
           >
             {"취소"}
           </Button>
