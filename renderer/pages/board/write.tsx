@@ -8,8 +8,9 @@ import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
 import makeDateString from "../../utils/dateUtils";
 import timeStringMaker from "../../utils/timeUtils";
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useMutation } from "react-query";
 
 const Write = () => {
   const router = useRouter();
@@ -22,22 +23,26 @@ const Write = () => {
   const onclick = () => {
     router.back();
   };
-  const onSubmit = async (e: SubmitEvent) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     try {
+      const id = uuidv4();
       const newBulletin: BulletinType = {
         index: boardList.length + 1,
-        id: uuidv4(),
+        id,
         title,
         content,
         date: makeDateString(),
         time: timeStringMaker(),
         count: 0,
       };
-      await addDoc(collection(db, "portpolioDB"), newBulletin);
+      await setDoc(doc(db, "board", id), newBulletin);
       router.back();
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(error);
+    }
   };
+  const { mutate } = useMutation(onSubmit);
+
   return (
     <section className="h-screen grid grid-cols-4 gap-5">
       <div className="flex justify-center mt-20 col-start-2 col-span-2 w-full">
@@ -61,11 +66,16 @@ const Write = () => {
             />
           </form>
           <div className="flex justify-evenly w-full mt-2">
-            <Button onClick={onSubmit} type="button" className="btn-blue">
+            <Button
+              onClick={() => mutate()}
+              type="submit"
+              className="btn-blue"
+              disabled={title && content ? false : true}
+            >
               완료
             </Button>
-            <Button type="button" onClick={onclick}>
-              back
+            <Button className="" type="button" onClick={onclick}>
+              뒤로
             </Button>
           </div>
         </div>
