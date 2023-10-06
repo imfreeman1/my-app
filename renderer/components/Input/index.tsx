@@ -7,6 +7,7 @@ const Input = ({
   type,
   placeholder,
   checked,
+  value,
 }: InputType) => {
   return (
     <input
@@ -15,6 +16,7 @@ const Input = ({
       placeholder={placeholder}
       onChange={onChange}
       checked={checked}
+      value={value}
     />
   );
 };
