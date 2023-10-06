@@ -3,40 +3,59 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useRecoilValue } from "recoil";
-import { boardListAtom } from "../../recoil/board";
+import { findBoardItem, lastIndexBoardItem } from "../../recoil/board";
 import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
 import makeDateString from "../../utils/dateUtils";
 import timeStringMaker from "../../utils/timeUtils";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useMutation } from "react-query";
 
 const Write = () => {
   const router = useRouter();
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const boardList = useRecoilValue(boardListAtom);
+  const modifyID = router.query.id ? router.query.id : null;
+  const findItem = modifyID ? useRecoilValue(findBoardItem(modifyID)) : null;
+  const [title, setTitle] = useState<string>(findItem ? findItem.title : "");
+  const [content, setContent] = useState<string>(
+    findItem ? findItem.content : ""
+  );
+  const lastIndex = useRecoilValue(lastIndexBoardItem);
   const onChange = ({ target }, callBack: Function) => {
     callBack(target.value);
   };
-  const onclick = () => {
-    router.back();
+  const backButtonHandler = (id: string | string[]) => {
+    if (!id) {
+      router.replace("/board");
+      return;
+    }
+    if (typeof id === "object") id = id[0];
+    router.replace(`/board/read/${id}`);
   };
   const onSubmit = async () => {
     try {
-      const id = uuidv4();
-      const newBulletin: BulletinType = {
-        index: boardList.length + 1,
-        id,
-        title,
-        content,
-        date: makeDateString(),
-        time: timeStringMaker(),
-        count: 0,
-      };
-      await setDoc(doc(db, "board", id), newBulletin);
-      router.back();
+      if (findItem) {
+        const id = findItem.id;
+        await updateDoc(doc(db, "board", id), {
+          title,
+          content,
+        });
+      }
+      if (!findItem) {
+        const id = uuidv4();
+        const newBulletin: BulletinType = {
+          index: lastIndex + 1,
+          id,
+          title,
+          content,
+          date: makeDateString(),
+          time: timeStringMaker(),
+          count: 0,
+        };
+        await setDoc(doc(db, "board", id), newBulletin);
+      }
+
+      router.replace("/board");
     } catch (error) {
       throw new Error(error);
     }
@@ -52,7 +71,7 @@ const Write = () => {
               <span>제목</span>
               <Input
                 value={title}
-                type={"text"}
+                type="text"
                 className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
                 onChange={(e) => onChange(e, setTitle)}
               />
@@ -74,7 +93,11 @@ const Write = () => {
             >
               완료
             </Button>
-            <Button className="" type="button" onClick={onclick}>
+            <Button
+              className=""
+              type="button"
+              onClick={() => backButtonHandler(modifyID)}
+            >
               뒤로
             </Button>
           </div>
