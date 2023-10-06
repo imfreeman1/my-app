@@ -1,4 +1,13 @@
 import { boardListAtom } from "./atom";
-import { searchShowBoardListState } from "./selector";
+import {
+  searchShowBoardListState,
+  findBoardItem,
+  lastIndexBoardItem,
+} from "./selector";
 
-export { boardListAtom, searchShowBoardListState };
+export {
+  boardListAtom,
+  searchShowBoardListState,
+  findBoardItem,
+  lastIndexBoardItem,
+};

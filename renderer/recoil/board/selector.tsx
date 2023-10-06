@@ -1,4 +1,4 @@
-import { selectorFamily } from "recoil";
+import { selector, selectorFamily } from "recoil";
 import { boardListAtom } from "./atom";
 
 const searchShowBoardListState = selectorFamily({
@@ -14,4 +14,24 @@ const searchShowBoardListState = selectorFamily({
     },
 });
 
-export { searchShowBoardListState };
+const findBoardItem = selectorFamily({
+  key: "findBoardItemState",
+  get:
+    (param: string | string[]) =>
+    ({ get }) => {
+      if (!param) return;
+      if (typeof param === "object") param = param[0];
+      const findItem = get(boardListAtom).filter((val) => val.id === param);
+      return findItem.pop();
+    },
+});
+
+const lastIndexBoardItem = selector({
+  key: "lastIndexBoardItemFinder",
+  get: ({ get }) => {
+    const index = Math.max(...get(boardListAtom).map((val) => val.index));
+    return index;
+  },
+});
+
+export { searchShowBoardListState, findBoardItem, lastIndexBoardItem };
