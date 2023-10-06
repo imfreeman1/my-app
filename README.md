@@ -191,3 +191,15 @@ interface BulletinType {
 ### 9/19
 
 - 통신 코드를 정리하고자 React-Query를 공부하고 사용하였음. React-Query를 사용하면 middleware를 따로 작성하고 관리하지 않아도 되고
+
+### 10/5
+
+- 한동안 프로그래머스 문제를 풀다보니 개인프로젝트에 소홀했다.
+- Board에서 CRUD 중 CREATE와 READ는 완성 되었고, UPDATE와 DELETE가 없어서 오늘은 남은 두가지를 만들어보는 것을 목표로 함.
+
+- DELETE의 경우 FireStore의 deleteDoc를 사용하여 간단하게 해결 할 수 있었음.
+
+- UPDATE는 기존에 사용하던 Write Page를 재활용 해보기로 결정하였고, Link 태그로 수정 버튼을 변경, QueryString으로 수정할 데이터의 ID를 전달.
+  Write Page에서 받아온 ID로 수정할 BoardItem을 Recoil Selector로 찾아옴. 찾아온 내용을 Input의 value와 textarea의 value로 넘겨줌.
+  이 과정에서 custom Input Component에 value가 전달되지 않는 문제가 있었음. 이때까지 문제가 없던 Input Component라서 문제를 찾기 힘들었음.
+  발생한 문제의 원인은 Input Component에서 value를 Props로 받고 있지 않았던 것. 기본적인 사용을 할때는 문제가 없으나, 사전에 value를 지정하기 위해서는 Props로 value를 넘겨줘야한다는 사실을 명확하게 알게되는 계기가 되었음.
