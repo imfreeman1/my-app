@@ -12,7 +12,7 @@ const getTodos = async (callBack: Function) => {
 const useGetTodos = (todoList: Object, callBack: Function) => {
   useEffect(() => {
     getTodos(callBack);
-  }, [todoList]);
+  }, []);
 };
 
 export default useGetTodos;
