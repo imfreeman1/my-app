@@ -1,14 +1,16 @@
 import React from "react";
+import { BOARD_CONSTANTS } from "../../constants/boardConstants/boardConstans";
 
 const BoardColumn = () => {
+  const { number, title, date, view } = BOARD_CONSTANTS.COLUMN;
   return (
     <div className=" absolute top-2 w-98% left-2">
       <div className="flex justify-between font-bold">
-        <span>No</span>
-        <span className="grow text-center">Title</span>
+        <span className="w-12 text-center">{number}</span>
+        <span className="grow text-center">{title}</span>
         <div className="flex gap-7">
-          <span>작성일</span>
-          <span>조회</span>
+          <span className=" w-14 text-center">{date}</span>
+          <span className="w-11">{view}</span>
         </div>
       </div>
     </div>
