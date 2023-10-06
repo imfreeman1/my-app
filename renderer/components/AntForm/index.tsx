@@ -1,39 +1,41 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
 import Button from "../Button";
-import { useRecoilState } from "recoil";
-import { todoListAtom } from "../../recoil/todo";
 import { defaultTodoType } from "../../recoil/todo/type";
 import { v4 as uuidv4 } from "uuid";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useMutation } from "react-query";
 
 const { TextArea } = Input;
 
 const AntForm = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [todoList, setTodoList] = useRecoilState(todoListAtom);
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+
   const inputChange = ({ target }) => {
     setTitle(target.value);
   };
   const textareaChange = ({ target }) => {
     setContent(target.value);
   };
-  const submitTodo = (e) => {
-    e.preventDefault();
+  const submitTodo = async () => {
+    const id = uuidv4();
     const todo: defaultTodoType = {
-      id: uuidv4(),
+      id,
       title,
       content,
       isCompleted: false,
     };
     setTitle("");
     setContent("");
-    setTodoList([...todoList, todo]);
+    await setDoc(doc(db, "todos", id), todo);
   };
   const cancelHandler = () => {
     setTitle("");
     setContent("");
   };
+  const { mutate } = useMutation(submitTodo);
 
   return (
     <div className="w-fit">
@@ -59,7 +61,7 @@ const AntForm = () => {
           <Button
             className="btn-blue"
             type="submit"
-            onClick={submitTodo}
+            onClick={() => mutate()}
             disabled={title && content ? false : true}
           >
             {"완료"}
