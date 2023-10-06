@@ -20,14 +20,14 @@ const SearchBar: React.FC<SearchBarType> = ({ setSelectorOption }) => {
       >
         <div className="w-fit">
           <select
-            className="rounded-md p-2 h-full mr-1 border-1 shadow-sm dark:shadow-gray-400"
+            className="rounded-md md:h-full p-2 md:p-2 mr-1 border-1 shadow-sm dark:shadow-gray-400"
             onChange={({ target }) => setOption(target.value)}
           >
             <option value="title">제목</option>
             <option value="content">글 내용</option>
           </select>
           <Input
-            className="p-2 rounded-md border-1 shadow-sm dark:shadow-gray-400"
+            className="md:p-2 p-1 rounded-md border-1 shadow-sm dark:shadow-gray-400 w-28 md:w-48"
             type="text"
             value={keyword}
             onChange={({ target }) => setKeyword(target.value)}
