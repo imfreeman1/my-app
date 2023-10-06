@@ -3,7 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { BulletinType } from "../recoil/board/type";
 
-const getData = async () => {
+const getBoardData = async () => {
   const boardResArray: BulletinType[] = [];
   const q = collection(db, "board");
   const res = await getDocs(q);
@@ -13,11 +13,11 @@ const getData = async () => {
 };
 
 const useBoardQuery = (callBack: Function) => {
-  useQuery(["boardList"], getData, {
+  useQuery(["boardList"], getBoardData, {
     onSuccess: (data) => {
       callBack(data);
     },
   });
 };
 
-export default useBoardQuery;
+export { getBoardData, useBoardQuery };

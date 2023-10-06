@@ -6,7 +6,7 @@ import BoardColumn from "../BoardColumn";
 import Button from "../Button";
 import listSlicer from "../../utils/listSlicer";
 import { MessageBoardType } from "./type";
-import useBoardQuery from "../../queries/useBoardQuery";
+import { useBoardQuery } from "../../queries/useBoardQuery";
 
 // 실제로 boardList가 사용되는 곳은 없음. newBoardList로 내용들이 관리된다! setter도 통신과정에서 한번 사용됨.
 // 그렇다면 이걸 selector로 옮겨서 가져오는게 좋을 것 같고, useEffect로 그려내는게 좋으려나..
