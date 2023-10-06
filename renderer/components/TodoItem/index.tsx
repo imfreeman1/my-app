@@ -10,6 +10,9 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { defaultTodoType } from "../../recoil/todo/type";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useMutation } from "react-query";
 
 const { TextArea } = Input;
 
@@ -19,18 +22,12 @@ const TodoItem = ({ todo }) => {
   const [inputValue, setInputValue] = useState<string>(todo.title);
   const [textAreaValue, setTextAreaValue] = useState<string>(todo.content);
 
-  const checkBoxHandler = () => {
-    let newList: defaultTodoType[] = structuredClone(todoList);
-    newList = newList.map((val) => {
-      if (val.id === todo.id) {
-        val.isCompleted = !val.isCompleted;
-        return val;
-      }
-      return val;
+  const checkBoxHandler = async () => {
+    await updateDoc(doc(db, "todos", todo.id), {
+      isCompleted: !todo.isCompleted,
     });
-    setTodoList(newList);
   };
-
+  const { mutate } = useMutation(checkBoxHandler);
   const onChange = ({ target }, callBack: React.Dispatch<string>) => {
     callBack(target.value);
   };
@@ -73,7 +70,7 @@ const TodoItem = ({ todo }) => {
           type="checkbox"
           className="w-8 h-5"
           checked={todo.isCompleted}
-          onChange={checkBoxHandler}
+          onChange={() => mutate()}
         />
         {!modify ? (
           <>
