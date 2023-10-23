@@ -1,6 +1,8 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../firebase";
+import { useRecoilState } from "recoil";
+import { todoListAtom } from "../recoil/todo";
 
 const getTodos = async (callBack: Function) => {
   const newArray = [];
@@ -9,10 +11,14 @@ const getTodos = async (callBack: Function) => {
   callBack(newArray);
 };
 
-const useGetTodos = (todoList: Object, callBack: Function) => {
+const useGetTodos = () => {
+  const [todoList, setTodoList] = useRecoilState(todoListAtom);
+
   useEffect(() => {
-    getTodos(callBack);
+    getTodos(setTodoList);
   }, []);
+
+  return todoList;
 };
 
 export default useGetTodos;
