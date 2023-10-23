@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useRecoilValue } from "recoil";
@@ -11,19 +11,23 @@ import timeStringMaker from "../../utils/timeUtils";
 import { setDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useMutation } from "react-query";
+import useInputs from "../../hook/useInputs";
+
+interface InitInputType {
+  title: string;
+  content: string;
+}
 
 const Write = () => {
   const router = useRouter();
-  const modifyID = router.query.id ? router.query.id : null;
+  const modifyID = router.query.id || null;
   const findItem = modifyID ? useRecoilValue(findBoardItem(modifyID)) : null;
-  const [title, setTitle] = useState<string>(findItem ? findItem.title : "");
-  const [content, setContent] = useState<string>(
-    findItem ? findItem.content : ""
-  );
+  const initInputs: InitInputType = findItem
+    ? { title: findItem.title, content: findItem.content }
+    : { title: "", content: "" };
+  const [inputs, onChange] = useInputs(initInputs);
+  const { title, content } = inputs;
   const lastIndex = useRecoilValue(lastIndexBoardItem);
-  const onChange = ({ target }, callBack: Function) => {
-    callBack(target.value);
-  };
   const backButtonHandler = (id: string | string[]) => {
     if (!id) {
       router.replace("/board");
@@ -70,14 +74,16 @@ const Write = () => {
             <label>
               <span>제목</span>
               <Input
+                name="title"
                 value={title}
                 type="text"
                 className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
-                onChange={(e) => onChange(e, setTitle)}
+                onChange={(e) => onChange(e)}
               />
             </label>
             <textarea
-              onChange={(e) => onChange(e, setContent)}
+              name="content"
+              onChange={(e) => onChange(e)}
               value={content}
               className="resize-none mt-3 overflow-auto border-2 border-gray-300 rounded-md py-2 px-3 bg-white"
               rows={12}

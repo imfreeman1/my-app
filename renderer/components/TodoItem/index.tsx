@@ -13,41 +13,42 @@ import { defaultTodoType } from "../../recoil/todo/type";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useMutation } from "react-query";
+import useInputs from "../../hook/useInputs";
 
 const { TextArea } = Input;
+
+interface InitInputType {
+  title: string;
+  content: string;
+}
 
 const TodoItem = ({ todo }) => {
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const [modify, setModify] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>(todo.title);
-  const [textAreaValue, setTextAreaValue] = useState<string>(todo.content);
-
+  const initInputs: InitInputType = {
+    title: todo.title,
+    content: todo.content,
+  };
+  const [inputs, onChange, cancelHandler] = useInputs(initInputs);
+  const { title, content } = inputs;
   const checkBoxHandler = async () => {
     await updateDoc(doc(db, "todos", todo.id), {
       isCompleted: !todo.isCompleted,
     });
   };
   const { mutate } = useMutation(checkBoxHandler);
-  const onChange = ({ target }, callBack: React.Dispatch<string>) => {
-    callBack(target.value);
-  };
 
   const modifyHandler = () => {
     setModify(!modify);
   };
 
-  const cancelHandler = () => {
-    setInputValue(todo.title);
-    setTextAreaValue(todo.content);
-    setModify(false);
-  };
-
+  // 여기는 셀렉터로 해결하자...
   const submitHandler = () => {
     let newList = structuredClone(todoList);
     newList = newList.map((val) => {
       if (val.id === todo.id) {
-        val.title = inputValue;
-        val.content = textAreaValue;
+        val.title = title;
+        val.content = content;
         return val;
       }
       return val;
@@ -106,13 +107,15 @@ const TodoItem = ({ todo }) => {
             <div className="grow flex flex-col h-full gap-1 w-32 text-clip">
               <Input
                 type="text"
-                value={inputValue}
-                onChange={(e) => onChange(e, setInputValue)}
+                name="title"
+                value={title}
+                onChange={(e) => onChange(e)}
               />
               <TextArea
                 rows={4}
-                value={textAreaValue}
-                onChange={(e) => onChange(e, setTextAreaValue)}
+                name="content"
+                value={content}
+                onChange={(e) => onChange(e)}
               />
             </div>
             <div className="h-full">
@@ -121,7 +124,7 @@ const TodoItem = ({ todo }) => {
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
                 onClick={submitHandler}
                 disabled={
-                  inputValue === todo.title && textAreaValue === todo.content
+                  title === todo.title && content === todo.content
                     ? true
                     : false
                 }
@@ -133,7 +136,10 @@ const TodoItem = ({ todo }) => {
               <Button
                 type="button"
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
-                onClick={cancelHandler}
+                onClick={() => {
+                  cancelHandler(initInputs);
+                  setModify(false);
+                }}
               >
                 {<AiOutlineClose size={24} color="red" />}
               </Button>
