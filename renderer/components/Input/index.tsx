@@ -5,6 +5,7 @@ const Input = ({
   className,
   onChange,
   type,
+  name,
   placeholder,
   checked,
   value,
@@ -13,6 +14,7 @@ const Input = ({
     <input
       className={className}
       type={type}
+      name={name}
       placeholder={placeholder}
       onChange={onChange}
       checked={checked}
