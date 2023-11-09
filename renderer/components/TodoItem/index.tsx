@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "antd";
 import Button from "../Button";
 import { useRecoilState } from "recoil";
-import { todoListAtom } from "../../recoil/todo";
+import { todoListAtom, todoUpdater } from "../../recoil/todo";
 import {
   AiFillEdit,
   AiFillDelete,
@@ -32,9 +32,10 @@ const TodoItem = ({ todo }) => {
   const [inputs, onChange, cancelHandler] = useInputs(initInputs);
   const { title, content } = inputs;
   const checkBoxHandler = async () => {
-    await updateDoc(doc(db, "todos", todo.id), {
+    updateDoc(doc(db, "todos", todo.id), {
       isCompleted: !todo.isCompleted,
     });
+    todoUpdater(todo.id);
   };
   const { mutate } = useMutation(checkBoxHandler);
 
