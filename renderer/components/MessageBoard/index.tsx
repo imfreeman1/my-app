@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { boardListAtom, searchShowBoardListState } from "../../recoil/board";
 import BoardItem from "../BoardItem";
@@ -7,6 +7,7 @@ import Button from "../Button";
 import listSlicer from "../../utils/listSlicer";
 import { MessageBoardType } from "./type";
 import { useBoardQuery } from "../../queries/useBoardQuery";
+import { NUMBER_CONSTANT } from "../../constants/basicConstants/basicConstants";
 
 // 실제로 boardList가 사용되는 곳은 없음. newBoardList로 내용들이 관리된다! setter도 통신과정에서 한번 사용됨.
 // 그렇다면 이걸 selector로 옮겨서 가져오는게 좋을 것 같고, useEffect로 그려내는게 좋으려나..
@@ -15,23 +16,32 @@ const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
   const [boardList, setBoardList] = useRecoilState(boardListAtom);
   useBoardQuery(setBoardList);
 
-  const [showPageNumber, setShowPageNumber] = useState<number>(1);
+  // 여기부터 useEffect까지 hook으로 변경해야함.
+  const [showPageNumber, setShowPageNumber] = useState<number>(
+    NUMBER_CONSTANT.one
+  );
   const [showPageNumberList, setShowPageNumberList] = useState<number[]>([]);
+
   const newBoardList =
     useRecoilValue(searchShowBoardListState(selectorOption)) || boardList;
-  const showBoardList = listSlicer(newBoardList, 6, showPageNumber);
+  const showBoardList = useMemo(
+    () => listSlicer(newBoardList, NUMBER_CONSTANT.six, showPageNumber),
+    [showPageNumber, newBoardList]
+  );
+  const makeNumberList = useCallback(() => {
+    let count =
+      Math.ceil(newBoardList.length / NUMBER_CONSTANT.six) ||
+      NUMBER_CONSTANT.one;
+    setShowPageNumberList(
+      Array(count)
+        .fill("")
+        .map((_, idx) => idx + NUMBER_CONSTANT.one)
+    );
+  }, [newBoardList]);
 
   useEffect(() => {
-    const makeNumberList = () => {
-      let count = Math.ceil(newBoardList.length / 6) || 1;
-      setShowPageNumberList(
-        Array(count)
-          .fill("")
-          .map((_, idx) => idx + 1)
-      );
-    };
     makeNumberList();
-  }, [newBoardList]);
+  }, [makeNumberList]);
 
   return (
     <div className="flex flex-col items-center my-4">
