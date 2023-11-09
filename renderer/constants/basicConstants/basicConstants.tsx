@@ -9,8 +9,9 @@ export const STRING_CONSTANT: IStringType = {
 
 export const NUMBER_CONSTANT: INumberType = {
   one: 1,
+  six: 6,
 };
 
 export const NAVIGATOR_CONSTANT: INavigateType<string> = {
-  list: ["Calculator", "TodoList", "Board"],
+  list: ["Calculator", "TodoList", "Board", "Test"],
 };
