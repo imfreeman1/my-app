@@ -1,8 +1,8 @@
 import React from "react";
 
-const Footer = () => {
+function Footer() {
   return (
-    <footer className="h-40 bg-gray-900 absolute w-full grid grid-cols-3 gap-5 text-gray-400">
+    <footer className="h-40 bg-gray-900 w-full grid grid-cols-3 gap-5 text-gray-400 relative bottom-0">
       <div className="col-start-1 col-span-1 p-5 gap-2 text-gray-400">
         <p>Title: My Port</p>
         <p>내가 만듦</p>
@@ -19,6 +19,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

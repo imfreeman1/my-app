@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { doc, increment, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { BoardItemType } from "./type";
 import Button from "../Button";
 import dateSplit from "../../utils/dateSplit";
 import dateStringMaker from "../../utils/dateUtils";
 import timeSplit from "../../utils/timeSplit";
-import { doc, increment, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useRouter } from "next/router";
 
 const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
   const router = useRouter();

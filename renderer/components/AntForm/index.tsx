@@ -1,13 +1,13 @@
 import React, { Ref, useEffect, useRef } from "react";
 import { Form, Input } from "antd";
-import Button from "../Button";
-import { defaultTodoType } from "../../recoil/todo/type";
 import { v4 as uuidv4 } from "uuid";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import { useMutation } from "react-query";
-import useInputs from "../../hook/useInputs";
 import { useSetRecoilState } from "recoil";
+import Button from "../Button";
+import { defaultTodoType } from "../../recoil/todo/type";
+import { db } from "../../firebase";
+import useInputs from "../../hook/useInputs";
 import { todoListAtom } from "../../recoil/todo";
 
 const { TextArea } = Input;
@@ -22,7 +22,7 @@ const initState: initInputType = {
   content: "",
 };
 
-const AntForm = () => {
+function AntForm() {
   const [inputs, onChange, cancelHandler] = useInputs(initState);
   const { title, content } = inputs;
   const inputRef = useRef(null);
@@ -77,22 +77,22 @@ const AntForm = () => {
             className="btn-blue active:border-white"
             type="submit"
             onClick={() => mutate()}
-            disabled={title && content ? false : true}
+            disabled={!(title && content)}
           >
-            {"완료"}
+            완료
           </Button>
           <Button
             className="btn-white"
             type="button"
             onClick={() => cancelHandler(initState)}
-            disabled={title || content ? false : true}
+            disabled={!(title || content)}
           >
-            {"취소"}
+            취소
           </Button>
         </div>
       </Form>
     </div>
   );
-};
+}
 
 export default AntForm;

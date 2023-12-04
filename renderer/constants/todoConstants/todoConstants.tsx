@@ -19,7 +19,7 @@ const TODO_CONSTANTS = {
       className: "h-full w-72 bg-white shadow-xl border-1 border-gray-300",
       title: "완료",
       titleClass: "text-black text-2xl py-1 px-3",
-      childTag: <TodoContainer completed={true} />,
+      childTag: <TodoContainer completed />,
     },
   ],
 };

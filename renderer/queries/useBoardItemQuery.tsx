@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase";
 import { useQuery } from "react-query";
+import { db } from "../firebase";
 
 const getBoardItem = async (id: string) => {
   if (typeof id === "string") {

@@ -3,7 +3,7 @@ import GrayOptBtn from "../GrayOptBtn";
 import NumBtn from "../NumBtn";
 import OrangeOptBtn from "../OrangeOptBtn";
 
-const CalController = () => {
+function CalController() {
   return (
     <div className="flex gap-1">
       <div className="flex flex-col gap-1 w-full">
@@ -13,6 +13,6 @@ const CalController = () => {
       <OrangeOptBtn />
     </div>
   );
-};
+}
 
 export default CalController;

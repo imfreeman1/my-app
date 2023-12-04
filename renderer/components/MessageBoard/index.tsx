@@ -18,7 +18,7 @@ const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
 
   // 여기부터 useEffect까지 hook으로 변경해야함.
   const [showPageNumber, setShowPageNumber] = useState<number>(
-    NUMBER_CONSTANT.one
+    NUMBER_CONSTANT.one,
   );
   const [showPageNumberList, setShowPageNumberList] = useState<number[]>([]);
 
@@ -26,16 +26,16 @@ const MessageBoard: React.FC<MessageBoardType> = ({ selectorOption }) => {
     useRecoilValue(searchShowBoardListState(selectorOption)) || boardList;
   const showBoardList = useMemo(
     () => listSlicer(newBoardList, NUMBER_CONSTANT.six, showPageNumber),
-    [showPageNumber, newBoardList]
+    [showPageNumber, newBoardList],
   );
   const makeNumberList = useCallback(() => {
-    let count =
+    const count =
       Math.ceil(newBoardList.length / NUMBER_CONSTANT.six) ||
       NUMBER_CONSTANT.one;
     setShowPageNumberList(
       Array(count)
         .fill("")
-        .map((_, idx) => idx + NUMBER_CONSTANT.one)
+        .map((_, idx) => idx + NUMBER_CONSTANT.one),
     );
   }, [newBoardList]);
 

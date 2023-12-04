@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import Button from "../Button";
 import { useRecoilState } from "recoil";
-import { todoListAtom, todoUpdater } from "../../recoil/todo";
 import {
   AiFillEdit,
   AiFillDelete,
   AiOutlineCheck,
   AiOutlineClose,
 } from "react-icons/ai";
-import { defaultTodoType } from "../../recoil/todo/type";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import { useMutation } from "react-query";
+import Button from "../Button";
+import { todoListAtom, todoUpdater } from "../../recoil/todo";
+import { defaultTodoType } from "../../recoil/todo/type";
+import { db } from "../../firebase";
 import useInputs from "../../hook/useInputs";
 
 const { TextArea } = Input;
@@ -22,7 +22,7 @@ interface InitInputType {
   content: string;
 }
 
-const TodoItem = ({ todo }) => {
+function TodoItem({ todo }) {
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const [modify, setModify] = useState<boolean>(false);
   const initInputs: InitInputType = {
@@ -90,7 +90,7 @@ const TodoItem = ({ todo }) => {
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
                 onClick={modifyHandler}
               >
-                {<AiFillEdit size={24} />}
+                <AiFillEdit size={24} />
               </Button>
             </div>
             <div className="h-full">
@@ -99,7 +99,7 @@ const TodoItem = ({ todo }) => {
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
                 onClick={() => deleteHandler(todo.id)}
               >
-                {<AiFillDelete size={24} />}
+                <AiFillDelete size={24} />
               </Button>
             </div>
           </>
@@ -124,13 +124,9 @@ const TodoItem = ({ todo }) => {
                 type="button"
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
                 onClick={submitHandler}
-                disabled={
-                  title === todo.title && content === todo.content
-                    ? true
-                    : false
-                }
+                disabled={!!(title === todo.title && content === todo.content)}
               >
-                {<AiOutlineCheck size={24} color=" green" />}
+                <AiOutlineCheck size={24} color=" green" />
               </Button>
             </div>
             <div className="h-full">
@@ -142,7 +138,7 @@ const TodoItem = ({ todo }) => {
                   setModify(false);
                 }}
               >
-                {<AiOutlineClose size={24} color="red" />}
+                <AiOutlineClose size={24} color="red" />
               </Button>
             </div>
           </>
@@ -150,6 +146,6 @@ const TodoItem = ({ todo }) => {
       </div>
     </li>
   );
-};
+}
 
 export default TodoItem;

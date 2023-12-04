@@ -8,7 +8,7 @@ const searchShowBoardListState = selectorFamily({
     ({ get }) => {
       if (!param) return;
       const newBoardList = get(boardListAtom).filter((val) =>
-        val[param.option].includes(param.keyword)
+        val[param.option].includes(param.keyword),
       );
       return newBoardList;
     },

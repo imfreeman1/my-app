@@ -3,7 +3,7 @@ import NavigationBar from "../NavigationBar";
 import { NAVIGATOR_CONSTANT } from "../../constants/basicConstants/basicConstants";
 import Footer from "../Footer";
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
   return (
     <>
       <NavigationBar navList={NAVIGATOR_CONSTANT.list} />
@@ -11,6 +11,6 @@ const Layout = ({ children }) => {
       <Footer />
     </>
   );
-};
+}
 
 export default Layout;

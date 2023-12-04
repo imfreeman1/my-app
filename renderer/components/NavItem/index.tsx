@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { NavItemType } from "./type";
 
-const NavItem = ({ content }: NavItemType) => {
+function NavItem({ content }: NavItemType) {
   return (
     <li className="nav-btn dark:text-black">
       <Link href={`/${content.toLowerCase()}`}>
@@ -10,6 +10,6 @@ const NavItem = ({ content }: NavItemType) => {
       </Link>
     </li>
   );
-};
+}
 
 export default NavItem;

@@ -4,7 +4,7 @@ import Title from "../Title";
 import { TODO_CONSTANTS } from "../../constants/todoConstants/todoConstants";
 import useGetTodos from "../../hook/useGetTodos";
 
-const TodoWrapper = () => {
+function TodoWrapper() {
   useGetTodos();
 
   return (
@@ -17,10 +17,10 @@ const TodoWrapper = () => {
               {childTag}
             </Card>
           );
-        }
+        },
       )}
     </section>
   );
-};
+}
 
 export default TodoWrapper;

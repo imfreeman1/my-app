@@ -1,12 +1,12 @@
 import React from "react";
-import Button from "../Button";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import Button from "../Button";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import { GRAY_BTN_METHOD } from "../../constants/btnConstants/btnConstants";
 
 // 나중엔 배열 풀자.
 
-const GrayOptBtn = () => {
+function GrayOptBtn() {
   const [count, setCount] = useRecoilState(calAtom);
 
   const setCountString = useSetRecoilState(calStringAtom);
@@ -29,6 +29,6 @@ const GrayOptBtn = () => {
       })}
     </ul>
   );
-};
+}
 
 export default GrayOptBtn;

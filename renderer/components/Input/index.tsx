@@ -1,7 +1,7 @@
 import React from "react";
 import { InputType } from "./type";
 
-const Input = ({
+function Input({
   className,
   onChange,
   type,
@@ -9,7 +9,7 @@ const Input = ({
   placeholder,
   checked,
   value,
-}: InputType) => {
+}: InputType) {
   return (
     <input
       className={className}
@@ -21,6 +21,6 @@ const Input = ({
       value={value}
     />
   );
-};
+}
 
 export default Input;

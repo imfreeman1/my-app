@@ -1,7 +1,7 @@
 import React from "react";
 import { BOARD_CONSTANTS } from "../../constants/boardConstants/boardConstants";
 
-const BoardColumn = () => {
+function BoardColumn() {
   const { number, title, date, view } = BOARD_CONSTANTS.COLUMN;
   return (
     <div className=" absolute top-2 w-98% left-2">
@@ -15,6 +15,6 @@ const BoardColumn = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BoardColumn;

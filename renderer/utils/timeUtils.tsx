@@ -3,7 +3,7 @@ import addZero from "./addZero";
 const timeStringMaker = () => {
   const date = new Date();
   const timeString = `${addZero(date.getHours())}:${addZero(
-    date.getMinutes()
+    date.getMinutes(),
   )}:${addZero(date.getSeconds())}`;
 
   return timeString;

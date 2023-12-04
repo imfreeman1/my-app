@@ -12,7 +12,7 @@ const getBoardData = async () => {
   return boardResArray;
 };
 
-const useBoardQuery = (callBack: Function) => {
+const useBoardQuery = (callBack: (array: BulletinType[]) => void) => {
   useQuery(["boardList"], getBoardData, {
     onSuccess: (data) => {
       callBack(data);

@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../Button";
 import { useRecoilState } from "recoil";
+import Button from "../Button";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import { BTN_LIST } from "../../constants/btnConstants/btnConstants";
 import { STRING_CONSTANT } from "../../constants/basicConstants/basicConstants";
 
-const NumBtn = () => {
+function NumBtn() {
   const [count, setCount] = useRecoilState(calAtom);
   const [countString, setCountString] = useRecoilState(calStringAtom);
   const onClick = (inputNum: string) => {
@@ -39,6 +39,6 @@ const NumBtn = () => {
       ))}
     </ul>
   );
-};
+}
 
 export default NumBtn;

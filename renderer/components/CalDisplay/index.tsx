@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import CalController from "../CalController";
 
-const CalDisplay = () => {
+function CalDisplay() {
   const count = useRecoilValue(calAtom);
   const countString = useRecoilValue(calStringAtom);
   return (
@@ -21,6 +21,6 @@ const CalDisplay = () => {
       <CalController />
     </div>
   );
-};
+}
 
 export default CalDisplay;

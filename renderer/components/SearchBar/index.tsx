@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import Input from "../Input";
 import Button from "../Button";
-import { AiOutlineSearch } from "react-icons/ai";
 import { SearchBarType } from "./type";
 
 const SearchBar: React.FC<SearchBarType> = ({ setSelectorOption }) => {

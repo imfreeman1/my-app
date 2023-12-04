@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import Button from "../../../components/Button";
 import { useRecoilValue } from "recoil";
-import { findBoardItem } from "../../../recoil/board";
-import { db } from "../../../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import Link from "next/link";
+import Button from "../../../components/Button";
+import { findBoardItem } from "../../../recoil/board";
+import { db } from "../../../firebase";
 
-const Board = () => {
+function Board() {
   const router = useRouter();
   const { id } = router.query;
   const findItemID = Array.isArray(id) ? id[0] : id;
@@ -15,7 +15,6 @@ const Board = () => {
 
   const deleteHandler = async () => {
     await deleteDoc(doc(db, "board", findItemID));
-    window.alert("삭제되었습니다.");
     router.replace("/board");
   };
 
@@ -63,6 +62,6 @@ const Board = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Board;

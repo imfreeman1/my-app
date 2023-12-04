@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import Button from "../Button";
 import { useRecoilState } from "recoil";
+import Button from "../Button";
 import { calAtom, calStringAtom } from "../../recoil/calculator";
 import {
   BTN_LIST,
@@ -19,7 +19,7 @@ const initRef: CalRefType = {
   operation: null,
 };
 
-const OrangeOptBtn = () => {
+function OrangeOptBtn() {
   const [count, setCount] = useRecoilState(calAtom);
   const [countString, setCountString] = useRecoilState(calStringAtom);
   const waitCalculation = useRef<CalRefType>(initRef);
@@ -31,7 +31,7 @@ const OrangeOptBtn = () => {
     }
     waitCalculation.current.operation = operation;
     setCountString(
-      waitCalculation.current?.waitNum + waitCalculation.current.operation
+      waitCalculation.current?.waitNum + waitCalculation.current.operation,
     );
     setCount(STRING_CONSTANT.zero);
   };
@@ -47,7 +47,7 @@ const OrangeOptBtn = () => {
     ORANGE_BTN_METHOD[waitCalculation.current.operation](
       waitCalculation.current.waitNum,
       count,
-      setCount
+      setCount,
     );
     waitCalculation.current.waitNum = null;
     waitCalculation.current.operation = null;
@@ -77,6 +77,6 @@ const OrangeOptBtn = () => {
       </li>
     </ul>
   );
-};
+}
 
 export default OrangeOptBtn;

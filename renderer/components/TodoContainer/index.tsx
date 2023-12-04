@@ -1,9 +1,9 @@
 import React from "react";
-import TodoItem from "../TodoItem";
 import { useRecoilValue } from "recoil";
+import TodoItem from "../TodoItem";
 import { completedSelector, unfinishedSelector } from "../../recoil/todo";
 
-const TodoContainer = ({ completed }) => {
+function TodoContainer({ completed }) {
   const todoList = completed
     ? useRecoilValue(completedSelector)
     : useRecoilValue(unfinishedSelector);
@@ -15,6 +15,6 @@ const TodoContainer = ({ completed }) => {
       })}
     </ul>
   );
-};
+}
 
 export default TodoContainer;

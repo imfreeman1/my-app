@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
+import { setDoc, doc, updateDoc } from "firebase/firestore";
+import { useMutation } from "react-query";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { useRecoilValue } from "recoil";
 import { findBoardItem, lastIndexBoardItem } from "../../recoil/board";
-import { v4 as uuidv4 } from "uuid";
 import { BulletinType } from "../../recoil/board/type";
 import makeDateString from "../../utils/dateUtils";
 import timeStringMaker from "../../utils/timeUtils";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useMutation } from "react-query";
 import useInputs from "../../hook/useInputs";
 
 interface InitInputType {
@@ -18,7 +18,7 @@ interface InitInputType {
   content: string;
 }
 
-const Write = () => {
+function Write() {
   const router = useRouter();
   const modifyID = router.query.id || null;
   const findItem = modifyID ? useRecoilValue(findBoardItem(modifyID)) : null;
@@ -39,7 +39,7 @@ const Write = () => {
   const onSubmit = async () => {
     try {
       if (findItem) {
-        const id = findItem.id;
+        const { id } = findItem;
         await updateDoc(doc(db, "board", id), {
           title,
           content,
@@ -95,7 +95,7 @@ const Write = () => {
               onClick={() => mutate()}
               type="submit"
               className="btn-blue"
-              disabled={title && content ? false : true}
+              disabled={!(title && content)}
             >
               완료
             </Button>
@@ -111,6 +111,6 @@ const Write = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Write;

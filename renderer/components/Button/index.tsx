@@ -1,7 +1,7 @@
 import React from "react";
 import { IButton } from "./type";
 
-const Button = ({ className, onClick, children, type, disabled }: IButton) => {
+function Button({ className, onClick, children, type, disabled }: IButton) {
   return (
     <button
       className={className}
@@ -12,6 +12,6 @@ const Button = ({ className, onClick, children, type, disabled }: IButton) => {
       {children}
     </button>
   );
-};
+}
 
 export default Button;

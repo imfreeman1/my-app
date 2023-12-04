@@ -1,7 +1,7 @@
 import React from "react";
 import CalDisplay from "../CalDisplay";
 
-const CalWrapper = () => {
+function CalWrapper() {
   return (
     <section className=" flex justify-center h-screen items-center">
       <div className="w-5/6 h-3/5 bg-black rounded-2xl flex items-center justify-center">
@@ -11,6 +11,6 @@ const CalWrapper = () => {
       </div>
     </section>
   );
-};
+}
 
 export default CalWrapper;

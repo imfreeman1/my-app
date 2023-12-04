@@ -1,13 +1,13 @@
 import React from "react";
-import NavItem from "../NavItem";
-import { NavigationBarType } from "./type";
 import { AiFillGithub, AiFillHome } from "react-icons/ai";
 import Link from "next/link";
-import Button from "../Button";
 import { useTheme } from "next-themes";
 import { IconContext } from "react-icons";
+import Button from "../Button";
+import { NavigationBarType } from "./type";
+import NavItem from "../NavItem";
 
-const NavigationBar = ({ navList }: NavigationBarType<string>) => {
+function NavigationBar({ navList }: NavigationBarType<string>) {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -37,7 +37,7 @@ const NavigationBar = ({ navList }: NavigationBarType<string>) => {
         <div className="w-20 text-center">
           <IconContext.Provider value={{ className: "icon-btn" }}>
             <Button type="button">
-              <Link href={"https://github.com/imfreeman1"}>
+              <Link href="https://github.com/imfreeman1">
                 <a target="_blank">
                   <AiFillGithub />
                 </a>
@@ -56,6 +56,6 @@ const NavigationBar = ({ navList }: NavigationBarType<string>) => {
       </div>
     </div>
   );
-};
+}
 
 export default NavigationBar;

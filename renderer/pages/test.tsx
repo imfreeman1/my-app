@@ -3,7 +3,7 @@ import Dialog from "../components/Dialog";
 
 const Test: React.FC = () => (
   <div className="h-screen">
-    <Dialog></Dialog>
+    <Dialog />
   </div>
 );
 

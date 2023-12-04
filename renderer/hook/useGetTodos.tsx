@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect } from "react";
-import { db } from "../firebase";
 import { useRecoilState } from "recoil";
+import { db } from "../firebase";
 import { todoListAtom } from "../recoil/todo";
 
 const getTodos = async (callBack: Function) => {
