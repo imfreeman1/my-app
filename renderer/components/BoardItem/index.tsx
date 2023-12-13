@@ -1,19 +1,19 @@
-import Link from "next/link";
-import React, { useEffect } from "react";
-import { doc, increment, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
-import { BoardItemType } from "./type";
-import Button from "../Button";
-import dateSplit from "../../utils/dateSplit";
-import dateStringMaker from "../../utils/dateUtils";
-import timeSplit from "../../utils/timeSplit";
-import { db } from "../../firebase";
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import { doc, increment, updateDoc } from 'firebase/firestore';
+import { useRouter } from 'next/router';
+import { BoardItemType } from './type';
+import Button from '../Button';
+import dateSplit from '../../utils/dateSplit';
+import dateStringMaker from '../../utils/dateUtils';
+import timeSplit from '../../utils/timeSplit';
+import db from '../../firebase';
 
-const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
+function BoardItem({ bulletin }: BoardItemType) {
   const router = useRouter();
   const onClick = async (id: string) => {
-    const countRef = doc(db, "board", bulletin.id);
-    await updateDoc(countRef, {
+    const countRef = doc(db, 'board', id);
+    updateDoc(countRef, {
       count: increment(1),
     });
   };
@@ -48,6 +48,6 @@ const BoardItem: React.FC<BoardItemType> = ({ bulletin }) => {
       </div>
     </li>
   );
-};
+}
 
 export default BoardItem;

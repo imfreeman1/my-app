@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Input } from "antd";
-import { useRecoilState } from "recoil";
+import React, { useState } from 'react';
+import { Input } from 'antd';
+import { useRecoilState } from 'recoil';
 import {
   AiFillEdit,
   AiFillDelete,
   AiOutlineCheck,
   AiOutlineClose,
-} from "react-icons/ai";
-import { doc, updateDoc } from "firebase/firestore";
-import { useMutation } from "react-query";
-import Button from "../Button";
-import { todoListAtom, todoUpdater } from "../../recoil/todo";
-import { defaultTodoType } from "../../recoil/todo/type";
-import { db } from "../../firebase";
-import useInputs from "../../hook/useInputs";
+} from 'react-icons/ai';
+import { doc, updateDoc } from 'firebase/firestore';
+import { useMutation } from 'react-query';
+import Button from '../Button';
+import { todoListAtom, todoUpdater } from '../../recoil/todo';
+import { DefaultTodoType } from '../../recoil/todo/type';
+import db from '../../firebase';
+import useInputs from '../../hook/useInputs';
 
 const { TextArea } = Input;
 
@@ -22,7 +22,7 @@ interface InitInputType {
   content: string;
 }
 
-function TodoItem({ todo }) {
+function TodoItem({ todo }: { todo: DefaultTodoType }) {
   const [todoList, setTodoList] = useRecoilState(todoListAtom);
   const [modify, setModify] = useState<boolean>(false);
   const initInputs: InitInputType = {
@@ -32,7 +32,7 @@ function TodoItem({ todo }) {
   const [inputs, onChange, cancelHandler] = useInputs(initInputs);
   const { title, content } = inputs;
   const checkBoxHandler = async () => {
-    updateDoc(doc(db, "todos", todo.id), {
+    updateDoc(doc(db, 'todos', todo.id), {
       isCompleted: !todo.isCompleted,
     });
     todoUpdater(todo.id);
@@ -45,21 +45,19 @@ function TodoItem({ todo }) {
 
   // 여기는 셀렉터로 해결하자...
   const submitHandler = () => {
-    let newList = structuredClone(todoList);
-    newList = newList.map((val) => {
-      if (val.id === todo.id) {
-        val.title = title;
-        val.content = content;
-        return val;
-      }
-      return val;
-    });
-    setTodoList(newList);
+    setTodoList((state) =>
+      state.map((todoItem) => {
+        if (todoItem.id === todo.id) {
+          return { ...todoItem, title, content };
+        }
+        return todoItem;
+      }),
+    );
     setModify(false);
   };
 
   const deleteHandler = (todoId) => {
-    let deleteList: defaultTodoType[] = structuredClone(todoList);
+    let deleteList: DefaultTodoType[] = structuredClone(todoList);
     deleteList = deleteList.filter(({ id }) => id !== todoId);
 
     setTodoList(deleteList);

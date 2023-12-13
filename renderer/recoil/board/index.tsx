@@ -1,9 +1,9 @@
-import { boardListAtom } from "./atom";
+import boardListAtom from './atom';
 import {
   searchShowBoardListState,
   findBoardItem,
   lastIndexBoardItem,
-} from "./selector";
+} from './selector';
 
 export {
   boardListAtom,

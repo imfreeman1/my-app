@@ -1,35 +1,35 @@
-import React, { Ref, useEffect, useRef } from "react";
-import { Form, Input } from "antd";
-import { v4 as uuidv4 } from "uuid";
-import { doc, setDoc } from "firebase/firestore";
-import { useMutation } from "react-query";
-import { useSetRecoilState } from "recoil";
-import Button from "../Button";
-import { defaultTodoType } from "../../recoil/todo/type";
-import { db } from "../../firebase";
-import useInputs from "../../hook/useInputs";
-import { todoListAtom } from "../../recoil/todo";
+import React, { useEffect, useRef } from 'react';
+import { Form, Input, InputRef } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
+import { doc, setDoc } from 'firebase/firestore';
+import { useMutation } from 'react-query';
+import { useSetRecoilState } from 'recoil';
+import Button from '../Button';
+import { DefaultTodoType } from '../../recoil/todo/type';
+import db from '../../firebase';
+import useInputs from '../../hook/useInputs';
+import { todoListAtom } from '../../recoil/todo';
 
 const { TextArea } = Input;
 
-interface initInputType {
+interface InitInputType {
   title: string;
   content: string;
 }
 
-const initState: initInputType = {
-  title: "",
-  content: "",
+const initState: InitInputType = {
+  title: '',
+  content: '',
 };
 
 function AntForm() {
   const [inputs, onChange, cancelHandler] = useInputs(initState);
   const { title, content } = inputs;
-  const inputRef = useRef(null);
+  const inputRef = useRef<InputRef>(null);
   const setTodoState = useSetRecoilState(todoListAtom);
   const submitTodo = async () => {
     const id = uuidv4();
-    const todo: defaultTodoType = {
+    const todo: DefaultTodoType = {
       id,
       title,
       content,
@@ -37,10 +37,10 @@ function AntForm() {
     };
     setTodoState((s) => [...s, todo]);
     cancelHandler(initState);
-    setDoc(doc(db, "todos", id), todo);
+    setDoc(doc(db, 'todos', id), todo);
   };
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current.focus();
   }, []);
 
   const { mutate } = useMutation(submitTodo);
@@ -69,7 +69,7 @@ function AntForm() {
             cols={18}
             rows={4}
             value={content}
-            style={{ resize: "none" }}
+            style={{ resize: 'none' }}
           />
         </Form.Item>
         <div className="flex justify-evenly">

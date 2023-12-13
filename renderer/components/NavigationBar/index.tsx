@@ -1,11 +1,11 @@
-import React from "react";
-import { AiFillGithub, AiFillHome } from "react-icons/ai";
-import Link from "next/link";
-import { useTheme } from "next-themes";
-import { IconContext } from "react-icons";
-import Button from "../Button";
-import { NavigationBarType } from "./type";
-import NavItem from "../NavItem";
+import React from 'react';
+import { AiFillGithub, AiFillHome } from 'react-icons/ai';
+import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import { IconContext } from 'react-icons';
+import Button from '../Button';
+import { NavigationBarType } from './type';
+import NavItem from '../NavItem';
 
 function NavigationBar({ navList }: NavigationBarType<string>) {
   const { theme, setTheme } = useTheme();
@@ -15,27 +15,25 @@ function NavigationBar({ navList }: NavigationBarType<string>) {
       <div className=" w-20 text-center">
         <IconContext.Provider
           value={{
-            className: "icon-btn",
+            className: 'icon-btn',
           }}
         >
           <Button type="button">
             <Link href="/home">
-              <a>
-                <AiFillHome />
-              </a>
+              <AiFillHome />
             </Link>
           </Button>
         </IconContext.Provider>
       </div>
 
-      <ul className="flex justify-center gap-4 sm:gap-8 md:gap-16 lg:gap-24 h-16 w-fit items-center font-semibold">
-        {navList.map((nav, idx) => {
-          return <NavItem key={idx} content={nav} />;
+      <ul className="flex justify-center gap-1 sm:gap-8 md:gap-16 lg:gap-24 h-16 w-fit items-center font-semibold">
+        {navList.map((nav) => {
+          return <NavItem key={nav} content={nav} />;
         })}
       </ul>
-      <div className="flex gap-8 items-center">
-        <div className="w-20 text-center">
-          <IconContext.Provider value={{ className: "icon-btn" }}>
+      <div className="flex md:gap-8 items-center">
+        <div className="md:w-20 text-center">
+          <IconContext.Provider value={{ className: 'icon-btn' }}>
             <Button type="button">
               <Link href="https://github.com/imfreeman1">
                 <a target="_blank">

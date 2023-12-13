@@ -1,33 +1,33 @@
-import { selector, selectorFamily } from "recoil";
-import { boardListAtom } from "./atom";
+import { selector, selectorFamily } from 'recoil';
+import boardListAtom from './atom';
 
 const searchShowBoardListState = selectorFamily({
-  key: "searchShowBoardListSelector",
+  key: 'searchShowBoardListSelector',
   get:
-    (param: { option: string; keyword: string }) =>
+    (param: { option: string; keyword: string } | null) =>
     ({ get }) => {
-      if (!param) return;
-      const newBoardList = get(boardListAtom).filter((val) =>
-        val[param.option].includes(param.keyword),
-      );
-      return newBoardList;
+      if (param) {
+        const newBoardList = get(boardListAtom).filter((val) =>
+          val[param?.option].includes(param?.keyword),
+        );
+        return newBoardList;
+      }
+      return boardListAtom;
     },
 });
 
 const findBoardItem = selectorFamily({
-  key: "findBoardItemState",
+  key: 'findBoardItemState',
   get:
-    (param: string | string[]) =>
+    (param: string) =>
     ({ get }) => {
-      if (!param) return;
-      if (typeof param === "object") param = param[0];
       const findItem = get(boardListAtom).filter((val) => val.id === param);
-      return findItem.pop();
+      return findItem[0];
     },
 });
 
 const lastIndexBoardItem = selector({
-  key: "lastIndexBoardItemFinder",
+  key: 'lastIndexBoardItemFinder',
   get: ({ get }) => {
     const index = Math.max(...get(boardListAtom).map((val) => val.index));
     return index;

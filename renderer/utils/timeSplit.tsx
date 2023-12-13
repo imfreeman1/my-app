@@ -1,5 +1,5 @@
 const timeSplit = (yearString: string): string => {
-  const [hours, minutes, _] = yearString.split(":");
+  const [hours, minutes] = yearString.split(':');
   const monthAndDay = `${hours}:${minutes}`;
 
   return monthAndDay;

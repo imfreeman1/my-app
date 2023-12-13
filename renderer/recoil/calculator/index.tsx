@@ -1,3 +1,3 @@
-import { calAtom, calStringAtom } from "./atom";
+import { calAtom, calStringAtom } from './atom';
 
 export { calAtom, calStringAtom };

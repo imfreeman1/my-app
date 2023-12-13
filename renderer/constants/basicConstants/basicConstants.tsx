@@ -1,10 +1,10 @@
-import { INavigateType, INumberType, IStringType } from "./type";
+import { INavigateType, INumberType, IStringType } from './type';
 
 export const STRING_CONSTANT: IStringType = {
-  zero: "0",
-  dot: ".",
-  empty: "",
-  equal: "=",
+  zero: '0',
+  dot: '.',
+  empty: '',
+  equal: '=',
 };
 
 export const NUMBER_CONSTANT: INumberType = {
@@ -13,5 +13,5 @@ export const NUMBER_CONSTANT: INumberType = {
 };
 
 export const NAVIGATOR_CONSTANT: INavigateType<string> = {
-  list: ["Calculator", "TodoList", "Board", "Test"],
+  list: ['Calculator', 'TodoList', 'Board'],
 };

@@ -1,4 +1,4 @@
-import { selectorOptType } from "../BoardWrapper/type";
+import { selectorOptType } from '../BoardWrapper/type';
 
 export interface MessageBoardType {
   selectorOption: selectorOptType;

@@ -1,17 +1,17 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { v4 as uuidv4 } from "uuid";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
-import { useMutation } from "react-query";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { findBoardItem, lastIndexBoardItem } from "../../recoil/board";
-import { BulletinType } from "../../recoil/board/type";
-import makeDateString from "../../utils/dateUtils";
-import timeStringMaker from "../../utils/timeUtils";
-import { db } from "../../firebase";
-import useInputs from "../../hook/useInputs";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
+import { setDoc, doc, updateDoc } from 'firebase/firestore';
+import { useMutation } from 'react-query';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { findBoardItem, lastIndexBoardItem } from '../../recoil/board';
+import { BulletinType } from '../../recoil/board/type';
+import makeDateString from '../../utils/dateUtils';
+import timeStringMaker from '../../utils/timeUtils';
+import db from '../../firebase';
+import useInputs from '../../hook/useInputs';
 
 interface InitInputType {
   title: string;
@@ -20,27 +20,26 @@ interface InitInputType {
 
 function Write() {
   const router = useRouter();
-  const modifyID = router.query.id || null;
+  const modifyID = router.query.id as string;
   const findItem = modifyID ? useRecoilValue(findBoardItem(modifyID)) : null;
   const initInputs: InitInputType = findItem
     ? { title: findItem.title, content: findItem.content }
-    : { title: "", content: "" };
+    : { title: '', content: '' };
   const [inputs, onChange] = useInputs(initInputs);
   const { title, content } = inputs;
   const lastIndex = useRecoilValue(lastIndexBoardItem);
-  const backButtonHandler = (id: string | string[]) => {
+  const backButtonHandler = (id: string) => {
     if (!id) {
-      router.replace("/board");
+      router.replace('/board');
       return;
     }
-    if (typeof id === "object") id = id[0];
     router.replace(`/board/read/${id}`);
   };
   const onSubmit = async () => {
     try {
       if (findItem) {
         const { id } = findItem;
-        await updateDoc(doc(db, "board", id), {
+        await updateDoc(doc(db, 'board', id), {
           title,
           content,
         });
@@ -56,10 +55,10 @@ function Write() {
           time: timeStringMaker(),
           count: 0,
         };
-        await setDoc(doc(db, "board", id), newBulletin);
+        await setDoc(doc(db, 'board', id), newBulletin);
       }
 
-      router.replace("/board");
+      router.replace('/board');
     } catch (error) {
       throw new Error(error);
     }

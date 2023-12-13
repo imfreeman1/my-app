@@ -1,10 +1,10 @@
-import { atom } from "recoil";
-import { DefaultTodoType } from "./type";
+import { atom } from 'recoil';
+import { DefaultTodoType } from './type';
 
 const defaultTodoList: DefaultTodoType[] = [];
 
 const todoListAtom = atom({
-  key: "todoListState",
+  key: 'todoListState',
   default: defaultTodoList,
 });
 

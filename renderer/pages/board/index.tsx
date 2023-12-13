@@ -1,5 +1,5 @@
-import React from "react";
-import BoardWrapper from "../../components/BoardWrapper";
+import React from 'react';
+import BoardWrapper from '../../components/BoardWrapper';
 
 function Board() {
   return <BoardWrapper />;

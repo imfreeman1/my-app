@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-import Input from "../Input";
-import Button from "../Button";
-import { SearchBarType } from "./type";
+import React, { FormEvent, useState } from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import Input from '../Input';
+import Button from '../Button';
+import { SearchBarType } from './type';
 
-const SearchBar: React.FC<SearchBarType> = ({ setSelectorOption }) => {
-  const [option, setOption] = useState<string>("title");
-  const [keyword, setKeyword] = useState<string>("");
+function SearchBar({ setSelectorOption }: SearchBarType) {
+  const [option, setOption] = useState<string>('title');
+  const [keyword, setKeyword] = useState<string>('');
 
-  const searchOptionSubmit = (e) => {
+  const searchOptionSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!keyword || !option) return;
     setSelectorOption({ option, keyword });
   };
   return (
@@ -41,6 +42,6 @@ const SearchBar: React.FC<SearchBarType> = ({ setSelectorOption }) => {
       </form>
     </div>
   );
-};
+}
 
 export default SearchBar;

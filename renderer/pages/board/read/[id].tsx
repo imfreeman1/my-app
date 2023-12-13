@@ -1,25 +1,24 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { deleteDoc, doc } from "firebase/firestore";
-import Link from "next/link";
-import Button from "../../../components/Button";
-import { findBoardItem } from "../../../recoil/board";
-import { db } from "../../../firebase";
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
+import Link from 'next/link';
+import { deleteDoc, doc } from 'firebase/firestore';
+import Button from '../../../components/Button';
+import { findBoardItem } from '../../../recoil/board';
+import db from '../../../firebase';
 
 function Board() {
   const router = useRouter();
-  const { id } = router.query;
-  const findItemID = Array.isArray(id) ? id[0] : id;
+  const findItemID = router.query.id as string;
   const boardItemState = useRecoilValue(findBoardItem(findItemID));
 
   const deleteHandler = async () => {
-    await deleteDoc(doc(db, "board", findItemID));
-    router.replace("/board");
+    await deleteDoc(doc(db, 'board', findItemID));
+    router.replace('/board');
   };
 
   useEffect(() => {
-    router.prefetch("/board");
+    router.prefetch('/board');
   }, [router]);
 
   return (
@@ -46,14 +45,17 @@ function Board() {
         </div>
         <div className="flex justify-end gap-5">
           <Button
-            onClick={() => router.replace("/board")}
+            onClick={() => router.replace('/board')}
             type="button"
             className="w-fit"
           >
             목록
           </Button>
-          <Link href={{ pathname: "/board/write", query: { id } }} replace>
-            <a>수정</a>
+          <Link
+            href={{ pathname: '/board/write', query: { findItemID } }}
+            replace
+          >
+            수정
           </Link>
           <Button type="button" onClick={deleteHandler}>
             삭제

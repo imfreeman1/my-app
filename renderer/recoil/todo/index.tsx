@@ -1,4 +1,4 @@
-import todoListAtom from "./atom";
-import { completedSelector, unfinishedSelector, todoUpdater } from "./selector";
+import todoListAtom from './atom';
+import { isCompletedSelector, todoUpdater } from './selector';
 
-export { todoListAtom, completedSelector, unfinishedSelector, todoUpdater };
+export { todoListAtom, isCompletedSelector, todoUpdater };

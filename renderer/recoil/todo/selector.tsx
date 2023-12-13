@@ -1,28 +1,32 @@
-import { selector, selectorFamily } from "recoil";
-import todoListAtom from "./atom";
+import { selectorFamily } from 'recoil';
+import todoListAtom from './atom';
 
-const completedSelector = selector({
-  key: "completedSelector",
-  get: ({ get }) => {
-    let filterList = get(todoListAtom);
-    filterList = filterList.filter(({ isCompleted }) => isCompleted === true);
-    return filterList;
-  },
+const isCompletedSelector = selectorFamily({
+  key: 'isCompletedSelector',
+  get:
+    (todoComplete: boolean) =>
+    ({ get }) => {
+      let filterList = get(todoListAtom);
+      filterList = filterList.filter(
+        ({ isCompleted }) => isCompleted === todoComplete,
+      );
+      return filterList;
+    },
 });
 
-const unfinishedSelector = selector({
-  key: "unfinishedSelector",
-  get: ({ get }) => {
-    let filterList = get(todoListAtom);
-    filterList = filterList.filter(({ isCompleted }) => isCompleted === false);
-    return filterList;
-  },
-});
+// const unfinishedSelector = selector({
+//   key: 'unfinishedSelector',
+//   get: ({ get }) => {
+//     let filterList = get(todoListAtom);
+//     filterList = filterList.filter(({ isCompleted }) => isCompleted === false);
+//     return filterList;
+//   },
+// });
 
 const todoUpdater = selectorFamily({
-  key: "todoStateUpdater",
+  key: 'todoStateUpdater',
   get:
-    (_) =>
+    () =>
     ({ get }) => {
       return get(todoListAtom);
     },
@@ -30,15 +34,14 @@ const todoUpdater = selectorFamily({
     (param) =>
     ({ get, set }) => {
       let newState = get(todoListAtom);
-      newState = newState.map((val) => {
-        if (val.id === param) {
-          val.isCompleted = !val.isCompleted;
-          return val;
+      newState = newState.map((todo) => {
+        if (todo.id === param) {
+          return { ...todo, isCompleted: !todo.isCompleted };
         }
-        return val;
+        return todo;
       });
       set(todoListAtom, newState);
     },
 });
 
-export { completedSelector, unfinishedSelector, todoUpdater };
+export { isCompletedSelector, todoUpdater };

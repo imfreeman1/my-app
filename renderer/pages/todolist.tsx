@@ -1,12 +1,8 @@
-import React from "react";
-import TodoWrapper from "../components/TodoWrapper";
+import React from 'react';
+import TodoWrapper from '../components/TodoWrapper';
 
 function TodoList() {
-  return (
-    <div className="grid grid-cols-12 grid-rows-8 h-screen">
-      <TodoWrapper />
-    </div>
-  );
+  return <TodoWrapper />;
 }
 
 export default TodoList;
