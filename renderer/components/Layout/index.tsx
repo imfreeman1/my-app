@@ -7,8 +7,7 @@ function Layout({ children }) {
   return (
     <>
       <NavigationBar navList={NAVIGATOR_CONSTANT.list} />
-      <div>{children}</div>
-
+      {children}
       <Footer />
     </>
   );
