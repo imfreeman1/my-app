@@ -7,17 +7,12 @@ import { useSetRecoilState } from 'recoil';
 import Button from '../Button';
 import { DefaultTodoType } from '../../recoil/todo/type';
 import db from '../../firebase';
-import useInputs from '../../hook/useInputs';
+import useInputs, { UseInputParamType } from '../../hook/useInputs';
 import { todoListAtom } from '../../recoil/todo';
 
 const { TextArea } = Input;
 
-interface InitInputType {
-  title: string;
-  content: string;
-}
-
-const initState: InitInputType = {
+const initState: UseInputParamType = {
   title: '',
   content: '',
 };
