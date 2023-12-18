@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from 'antd';
-import { useRecoilState } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
 import {
   AiFillEdit,
   AiFillDelete,
@@ -10,32 +10,41 @@ import {
 import { doc, updateDoc } from 'firebase/firestore';
 import { useMutation } from 'react-query';
 import Button from '../Button';
-import { todoListAtom, todoUpdater } from '../../recoil/todo';
 import { DefaultTodoType } from '../../recoil/todo/type';
 import db from '../../firebase';
-import useInputs from '../../hook/useInputs';
+import useInputs, { UseInputParamType } from '../../hook/useInputs';
 
 const { TextArea } = Input;
 
-interface InitInputType {
-  title: string;
-  content: string;
-}
+// 리스트 전체를 item에서 다 불러오는 것은 좋지 않음.
+// update와 delete 두개의 setter를 사용하고 싶은데, family를 어떻게 구성해야할까?
 
-function TodoItem({ todo }: { todo: DefaultTodoType }) {
-  const [todoList, setTodoList] = useRecoilState(todoListAtom);
+function TodoItem({
+  todo,
+  setTodoList,
+}: {
+  todo: DefaultTodoType;
+  setTodoList: SetterOrUpdater<DefaultTodoType[]>;
+}) {
   const [modify, setModify] = useState<boolean>(false);
-  const initInputs: InitInputType = {
+  const initInputs: UseInputParamType = {
     title: todo.title,
     content: todo.content,
   };
   const [inputs, onChange, cancelHandler] = useInputs(initInputs);
   const { title, content } = inputs;
   const checkBoxHandler = async () => {
+    const reverseBool = !todo.isCompleted;
     updateDoc(doc(db, 'todos', todo.id), {
-      isCompleted: !todo.isCompleted,
+      isCompleted: reverseBool,
     });
-    todoUpdater(todo.id);
+    setTodoList((state) =>
+      state.map((todoItem) => {
+        if (todoItem.id === todo.id)
+          return { ...todoItem, isCompleted: reverseBool };
+        return todoItem;
+      }),
+    );
   };
   const { mutate } = useMutation(checkBoxHandler);
 
@@ -53,18 +62,15 @@ function TodoItem({ todo }: { todo: DefaultTodoType }) {
         return todoItem;
       }),
     );
-    setModify(false);
+    modifyHandler();
   };
 
-  const deleteHandler = (todoId) => {
-    let deleteList: DefaultTodoType[] = structuredClone(todoList);
-    deleteList = deleteList.filter(({ id }) => id !== todoId);
-
-    setTodoList(deleteList);
+  const deleteHandler = () => {
+    setTodoList((state) => state.filter(({ id }) => id !== todo.id));
   };
 
   return (
-    <li className="m-2">
+    <li className="m-2 snap-center">
       <div className="bg-white text-black flex gap-1 w-60 h-36 rounded-md p-2 items-center shadow-md border-1 border-gray-100">
         <Input
           type="checkbox"
@@ -95,7 +101,7 @@ function TodoItem({ todo }: { todo: DefaultTodoType }) {
               <Button
                 type="button"
                 className="h-fit p-1 mt-4 hover:opacity-70 duration-300"
-                onClick={() => deleteHandler(todo.id)}
+                onClick={deleteHandler}
               >
                 <AiFillDelete size={24} />
               </Button>
