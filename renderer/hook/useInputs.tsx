@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from 'react';
 
-const useInputs = <T extends {}>(inputType: T): [T, Function, Function] => {
+export interface UseInputParamType {
+  [inputType: string]: string;
+}
+interface OnChangeType {
+  ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
+}
+interface CancelHandlerType {
+  (nextState: UseInputParamType): void;
+}
+interface UseInputType {
+  (
+    inputType: UseInputParamType,
+  ): [UseInputParamType, OnChangeType, CancelHandlerType];
+}
+const useInputs: UseInputType = (inputType) => {
   const [inputs, setInputs] = useState(inputType);
-  const onChange = ({ target }) => {
+  const onChange: OnChangeType = ({ target }) => {
     const { name, value } = target;
     setInputs((state) => ({ ...state, [name]: value }));
   };
 
-  const cancelHandler = (nextState: T) => {
+  const cancelHandler: CancelHandlerType = (nextState) => {
     setInputs(nextState);
   };
 
