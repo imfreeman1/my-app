@@ -1,16 +1,16 @@
-import React, { useRef } from "react";
-import { useRecoilState } from "recoil";
-import Button from "../Button";
-import { calAtom, calStringAtom } from "../../recoil/calculator";
+import React, { useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import Button from '../Button';
+import { calAtom, calStringAtom } from '../../recoil/calculator';
 import {
   BTN_LIST,
   ORANGE_BTN_METHOD,
-} from "../../constants/btnConstants/btnConstants";
-import { CalRefType } from "./type";
+} from '../../constants/btnConstants/btnConstants';
+import { CalRefType } from './type';
 import {
   NUMBER_CONSTANT,
   STRING_CONSTANT,
-} from "../../constants/basicConstants/basicConstants";
+} from '../../constants/basicConstants/basicConstants';
 
 // ref보단 state로 관리하는 것이 좋을 듯. atom으로 관리하면 제일 베스트.
 // 추가적으로 필요한 것 : atom Selector에 대한 이해.

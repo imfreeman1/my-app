@@ -1,7 +1,7 @@
-import React from "react";
-import GrayOptBtn from "../GrayOptBtn";
-import NumBtn from "../NumBtn";
-import OrangeOptBtn from "../OrangeOptBtn";
+import React from 'react';
+import GrayOptBtn from '../GrayOptBtn';
+import NumBtn from '../NumBtn';
+import OrangeOptBtn from '../OrangeOptBtn';
 
 function CalController() {
   return (

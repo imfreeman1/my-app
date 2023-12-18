@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { QueryCache } from 'react-query';
 import Title from '../Title';
 import SearchBar from '../SearchBar';
 import MessageBoard from '../MessageBoard';
 import { selectorOptType } from './type';
 import { boardListAtom } from '../../recoil/board';
 import { useBoardQuery } from '../../queries/useBoardQuery';
-import { QueryCache } from 'react-query';
 
 function BoardWrapper() {
   const [selectorOption, setSelectorOption] = useState<selectorOptType>(null);

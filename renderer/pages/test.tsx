@@ -1,10 +1,10 @@
-import React from "react";
-import Dialog from "../components/Dialog";
+import React from 'react';
+import Dialog from '../components/Dialog';
 
-const Test: React.FC = () => (
+function Test() {
   <div className="h-screen">
     <Dialog />
-  </div>
-);
+  </div>;
+}
 
 export default Test;
