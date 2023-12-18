@@ -1,19 +1,19 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import TodoItem from '../TodoItem';
-import { isCompletedSelector } from '../../recoil/todo';
 
-function TodoContainer({ completed }) {
+function TodoContainer({ todoList, setTodoList }) {
   // completed를 selector에 보내서 결과를 출력할 수 있게 변경할 것.
-  const todoList = useRecoilValue(isCompletedSelector(completed));
-  // : useRecoilValue(unfinishedSelector);
 
   return (
-    <ul className="overflow-auto">
-      {todoList?.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} />;
-      })}
-    </ul>
+    <div className="lg:pt-8 relative overflow-auto">
+      <ul className="overflow-y-scroll snap-y">
+        {todoList?.map((todo) => {
+          return (
+            <TodoItem key={todo.id} todo={todo} setTodoList={setTodoList} />
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
