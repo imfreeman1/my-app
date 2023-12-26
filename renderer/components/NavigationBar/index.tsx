@@ -12,7 +12,7 @@ function NavigationBar({ navList }: NavigationBarType<string>) {
     return { className: 'icon-btn' };
   }, []);
   return (
-    <div className="flex justify-between items-center md:px-6 px-2 bg-black text-white dark:bg-white dark:text-white md:h-24 h-16">
+    <nav className="flex justify-between items-center md:px-6 px-2 bg-black text-white dark:bg-white dark:text-white md:h-24 h-16">
       <div className="text-center">
         <IconContext.Provider value={iconButtonConfig}>
           <Button type="button">
@@ -44,7 +44,7 @@ function NavigationBar({ navList }: NavigationBarType<string>) {
         </div>
         <ThemeSelector iconButtonConfig={iconButtonConfig} />
       </div>
-    </div>
+    </nav>
   );
 }
 
