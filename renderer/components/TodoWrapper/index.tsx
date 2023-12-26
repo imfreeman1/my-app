@@ -21,7 +21,7 @@ function TodoWrapper() {
             return (
               <Card
                 key={`todoList${bool}`}
-                className=" lg:h-[28rem] lg:w-72 w-20 h-20 bg-white drop-shadow-xl border-1 border-gray-300"
+                className=" lg:h-[28rem] lg:w-72 w-20 h-20 bg-white drop-shadow-xl border-1 border-gray-300 scroll"
               >
                 <Title className="text-black text-2xl py-1 px-3 stick w-full text-center z-10 top-0">
                   {bool ? '완료' : '진행 중'}
