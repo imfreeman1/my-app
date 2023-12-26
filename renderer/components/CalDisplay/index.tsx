@@ -7,7 +7,7 @@ function CalDisplay() {
   const count = useRecoilValue(calAtom);
   const countString = useRecoilValue(calStringAtom);
   return (
-    <div className="flex flex-col justify-center w-56 h-fit">
+    <div className="flex flex-col justify-center w-48 h-fit">
       <div className="flex flex-col justify-end px-3 h-16 bg-gray-200 pt-4 pb-1 mb-1 rounded-t">
         {countString && (
           <div className="w-full pr-1">

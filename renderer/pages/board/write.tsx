@@ -11,18 +11,13 @@ import { BulletinType } from '../../recoil/board/type';
 import makeDateString from '../../utils/dateUtils';
 import timeStringMaker from '../../utils/timeUtils';
 import db from '../../firebase';
-import useInputs from '../../hook/useInputs';
-
-interface InitInputType {
-  title: string;
-  content: string;
-}
+import useInputs, { UseInputParamType } from '../../hook/useInputs';
 
 function Write() {
   const router = useRouter();
   const modifyID = router.query.id as string;
-  const findItem = modifyID ? useRecoilValue(findBoardItem(modifyID)) : null;
-  const initInputs: InitInputType = findItem
+  const findItem = useRecoilValue(findBoardItem(modifyID));
+  const initInputs: UseInputParamType = findItem
     ? { title: findItem.title, content: findItem.content }
     : { title: '', content: '' };
   const [inputs, onChange] = useInputs(initInputs);
@@ -69,17 +64,16 @@ function Write() {
     <section className="h-screen grid grid-cols-4 gap-5">
       <div className="flex justify-center mt-20 col-start-2 col-span-2 w-full">
         <div className="py-5 px-7 border-2 border-black rounded-xl h-fit bg-white text-black">
-          <form className="flex flex-col gap-5">
-            <label>
-              <span>제목</span>
-              <Input
-                name="title"
-                value={title}
-                type="text"
-                className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
-                onChange={(e) => onChange(e)}
-              />
-            </label>
+          <form className="flex flex-col gap-5" onSubmit={() => mutate()}>
+            <span>제목</span>
+            <Input
+              name="title"
+              value={title}
+              id="input"
+              type="text"
+              className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
+              onChange={(e) => onChange(e)}
+            />
             <textarea
               name="content"
               onChange={(e) => onChange(e)}
@@ -91,7 +85,6 @@ function Write() {
           </form>
           <div className="flex justify-evenly w-full mt-2">
             <Button
-              onClick={() => mutate()}
               type="submit"
               className="btn-blue"
               disabled={!(title && content)}

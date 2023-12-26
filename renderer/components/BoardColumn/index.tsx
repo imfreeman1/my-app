@@ -1,5 +1,5 @@
-import React from "react";
-import { BOARD_CONSTANTS } from "../../constants/boardConstants/boardConstants";
+import React from 'react';
+import { BOARD_CONSTANTS } from '../../constants/boardConstants/boardConstants';
 
 function BoardColumn() {
   const { number, title, date, view } = BOARD_CONSTANTS.COLUMN;

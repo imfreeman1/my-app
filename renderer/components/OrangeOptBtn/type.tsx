@@ -1,4 +1,4 @@
 export interface CalRefType {
-  waitNum: null | string;
-  operation: null | string;
+  waitNum: string;
+  operation: string;
 }

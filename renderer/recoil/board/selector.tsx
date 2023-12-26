@@ -4,24 +4,25 @@ import boardListAtom from './atom';
 const searchShowBoardListState = selectorFamily({
   key: 'searchShowBoardListSelector',
   get:
-    (param: { option: string; keyword: string } | null) =>
+    (searchOption: { option: string; keyword: string } | null) =>
     ({ get }) => {
-      if (param) {
-        const newBoardList = get(boardListAtom).filter((val) =>
-          val[param?.option].includes(param?.keyword),
-        );
-        return newBoardList;
-      }
-      return boardListAtom;
+      if (!searchOption) return boardListAtom;
+      const newBoardList = get(boardListAtom).filter((val) =>
+        val[searchOption?.option].includes(searchOption?.keyword),
+      );
+      return newBoardList;
     },
 });
 
 const findBoardItem = selectorFamily({
   key: 'findBoardItemState',
   get:
-    (param: string) =>
+    (findItemID: string | null) =>
     ({ get }) => {
-      const findItem = get(boardListAtom).filter((val) => val.id === param);
+      if (!findItemID) return null;
+      const findItem = get(boardListAtom).filter(
+        (val) => val.id === findItemID,
+      );
       return findItem[0];
     },
 });

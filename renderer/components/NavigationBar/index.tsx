@@ -1,26 +1,25 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AiFillGithub, AiFillHome } from 'react-icons/ai';
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 import { IconContext } from 'react-icons';
 import Button from '../Button';
 import { NavigationBarType } from './type';
 import NavItem from '../NavItem';
+import ThemeSelector from '../ThemeSelector';
 
 function NavigationBar({ navList }: NavigationBarType<string>) {
-  const { theme, setTheme } = useTheme();
-
+  const iconButtonConfig = useMemo(() => {
+    return { className: 'icon-btn' };
+  }, []);
   return (
-    <div className="flex justify-between items-center px-6 bg-black text-white dark:bg-white dark:text-white h-24">
-      <div className=" w-20 text-center">
-        <IconContext.Provider
-          value={{
-            className: 'icon-btn',
-          }}
-        >
+    <nav className="flex justify-between items-center md:px-6 px-2 bg-black text-white dark:bg-white dark:text-white md:h-24 h-16">
+      <div className="text-center">
+        <IconContext.Provider value={iconButtonConfig}>
           <Button type="button">
             <Link href="/home">
-              <AiFillHome />
+              <div>
+                <AiFillHome />
+              </div>
             </Link>
           </Button>
         </IconContext.Provider>
@@ -31,28 +30,21 @@ function NavigationBar({ navList }: NavigationBarType<string>) {
           return <NavItem key={nav} content={nav} />;
         })}
       </ul>
-      <div className="flex md:gap-8 items-center">
+      <div className="flex md:gap-8 items-center gap-2">
         <div className="md:w-20 text-center">
-          <IconContext.Provider value={{ className: 'icon-btn' }}>
+          <IconContext.Provider value={iconButtonConfig}>
             <Button type="button">
-              <Link href="https://github.com/imfreeman1">
-                <a target="_blank">
+              <Link href="https://github.com/imfreeman1" target="_blank">
+                <div>
                   <AiFillGithub />
-                </a>
+                </div>
               </Link>
             </Button>
           </IconContext.Provider>
         </div>
-        <select
-          value={theme}
-          className="bg-gray-700 text-white p-1 rounded-md"
-          onChange={(e) => setTheme(e.target.value)}
-        >
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
+        <ThemeSelector iconButtonConfig={iconButtonConfig} />
       </div>
-    </div>
+    </nav>
   );
 }
 

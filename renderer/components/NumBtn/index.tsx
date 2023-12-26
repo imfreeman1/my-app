@@ -1,9 +1,9 @@
-import React from "react";
-import { useRecoilState } from "recoil";
-import Button from "../Button";
-import { calAtom, calStringAtom } from "../../recoil/calculator";
-import { BTN_LIST } from "../../constants/btnConstants/btnConstants";
-import { STRING_CONSTANT } from "../../constants/basicConstants/basicConstants";
+import React from 'react';
+import { useRecoilState } from 'recoil';
+import Button from '../Button';
+import { calAtom, calStringAtom } from '../../recoil/calculator';
+import { BTN_LIST } from '../../constants/btnConstants/btnConstants';
+import { STRING_CONSTANT } from '../../constants/basicConstants/basicConstants';
 
 function NumBtn() {
   const [count, setCount] = useRecoilState(calAtom);
@@ -27,7 +27,7 @@ function NumBtn() {
   return (
     <ul className="grid grid-cols-3 grid-rows-4 gap-1">
       {BTN_LIST.num.map((btn) => (
-        <li className={`${btn === "0" ? "col-span-2" : ""}`} key={btn}>
+        <li className={`${btn === '0' ? 'col-span-2' : ''}`} key={btn}>
           <Button
             type="button"
             className="btn-darkGray"

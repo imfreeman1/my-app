@@ -1,9 +1,10 @@
-import React from "react";
-import { InputType } from "./type";
+import React from 'react';
+import { InputType } from './type';
 
 function Input({
   className,
   onChange,
+  id,
   type,
   name,
   placeholder,
@@ -12,6 +13,7 @@ function Input({
 }: InputType) {
   return (
     <input
+      id={id}
       className={className}
       type={type}
       name={name}

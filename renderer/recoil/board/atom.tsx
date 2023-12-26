@@ -1,6 +1,6 @@
-import { atom } from "recoil";
-import { BulletinType } from "./type";
-import { getBoardData } from "../../queries/useBoardQuery";
+import { atom } from 'recoil';
+import { BulletinType } from './type';
+import { getBoardData } from '../../queries/useBoardQuery';
 
 const initBoardList = async () => {
   const defaultBoardList: BulletinType[] = await getBoardData();
@@ -8,7 +8,7 @@ const initBoardList = async () => {
 };
 
 const boardListAtom = atom({
-  key: "boardListState",
+  key: 'boardListState',
   default: initBoardList(),
 });
 

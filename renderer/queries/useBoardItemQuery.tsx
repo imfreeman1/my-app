@@ -3,14 +3,12 @@ import { useQuery } from 'react-query';
 import db from '../firebase';
 
 const getBoardItem = async (id: string) => {
-  if (typeof id === 'string') {
-    const temp = [];
-    const boardRef = collection(db, 'board');
-    const q = query(boardRef, where('id', '==', id));
-    const res = await getDocs(q);
-    res.forEach((resData) => temp.push(resData.data()));
-    return temp[0];
-  }
+  const temp = [];
+  const boardRef = collection(db, 'board');
+  const q = query(boardRef, where('id', '==', id));
+  const res = await getDocs(q);
+  res.forEach((resData) => temp.push(resData.data()));
+  return temp[0];
 };
 
 const useBoardItemQuery = (id: string) => {
