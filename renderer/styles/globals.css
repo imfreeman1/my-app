@@ -10,7 +10,7 @@
 }
 @layer base {
   html {
-    @apply  h-full
+    @apply h-full
   }
   body {
     @apply font-mono dark:bg-gray-950 dark:text-white bg-cover bg-white text-black min-h-full antialiased;
