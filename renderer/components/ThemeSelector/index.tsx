@@ -10,7 +10,7 @@ function ThemeSelector({ iconButtonConfig }) {
   const modalHandler = () => {
     setModal((s) => !s);
   };
-  const modalRef = useRef<HTMLSelectElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const themeChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(e.target.value);
   };
@@ -18,7 +18,7 @@ function ThemeSelector({ iconButtonConfig }) {
     if (!modalRef.current?.contains(target as Node)) setModal(false);
   };
   useEffect(() => {
-    document.addEventListener('mousedown', setOff);
+    if (modal) document.addEventListener('mousedown', setOff);
 
     return () => {
       document.removeEventListener('mousedown', setOff);
@@ -26,20 +26,23 @@ function ThemeSelector({ iconButtonConfig }) {
   }, [modal]);
 
   return (
-    <div>
-      <Button className="dark:fill-black" onClick={modalHandler} type="button">
+    <div ref={modalRef}>
+      <Button
+        className="dark:fill-black content-center"
+        onClick={modalHandler}
+        type="button"
+      >
         <IconContext.Provider value={iconButtonConfig}>
           <div>
             <LuSun className="dark:hidden" />
-            <LuMoonStar className="hidden dark:inline" />
+            <LuMoonStar className="hidden dark:block" />
           </div>
         </IconContext.Provider>
       </Button>
       {modal && (
         <select
-          className="bg-gray-700 text-white p-1 rounded-md absolute top-16 right-0"
+          className="bg-gray-700 text-white p-1 rounded-md absolute top-16 right-0 animate-slideY"
           value={theme}
-          ref={modalRef}
           onChange={(e) => themeChangeHandler(e)}
         >
           <option value="light">Light</option>
