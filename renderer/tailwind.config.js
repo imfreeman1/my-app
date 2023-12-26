@@ -36,12 +36,12 @@ module.exports = {
       },
       keyframes: {
         slideY: {
-          '0%': { transform: 'translateY(-20%)' },
+          '0%': { transform: 'translateY(-30%)' },
           '100%': { transform: 'translateY(0%)' },
         },
       },
       animation: {
-        slideY: 'slide 0.5s',
+        slideY: 'slideY 1s',
       },
     },
   },
