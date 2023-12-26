@@ -65,17 +65,15 @@ function Write() {
       <div className="flex justify-center mt-20 col-start-2 col-span-2 w-full">
         <div className="py-5 px-7 border-2 border-black rounded-xl h-fit bg-white text-black">
           <form className="flex flex-col gap-5" onSubmit={() => mutate()}>
-            <label htmlFor="input">
-              <span>제목</span>
-              <Input
-                name="title"
-                value={title}
-                id="input"
-                type="text"
-                className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
-                onChange={(e) => onChange(e)}
-              />
-            </label>
+            <span>제목</span>
+            <Input
+              name="title"
+              value={title}
+              id="input"
+              type="text"
+              className="w-full mt-3 border-2 border-gray-300 rounded-md px-3 py-1 bg-white"
+              onChange={(e) => onChange(e)}
+            />
             <textarea
               name="content"
               onChange={(e) => onChange(e)}
