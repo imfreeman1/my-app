@@ -34,6 +34,15 @@ module.exports = {
       borderWidth: {
         1: '1px',
       },
+      keyframes: {
+        slideY: {
+          '0%': { transform: 'translateY(-20%)' },
+          '100%': { transform: 'translateY(0%)' },
+        },
+      },
+      animation: {
+        slideY: 'slide 0.5s',
+      },
     },
   },
   plugins: [],
