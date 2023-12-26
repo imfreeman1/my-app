@@ -4,10 +4,8 @@ import { NavItemType } from './type';
 
 function NavItem({ content }: NavItemType) {
   return (
-    <li className="nav-btn dark:text-black">
-      <Link href={`/${content.toLowerCase()}`}>
-        <span>{content}</span>
-      </Link>
+    <li className="nav-btn dark:text-black select-none">
+      <Link href={`/${content.toLowerCase()}`}>{content}</Link>
     </li>
   );
 }
